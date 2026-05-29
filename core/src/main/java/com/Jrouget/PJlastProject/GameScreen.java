@@ -4,17 +4,28 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class GameScreen implements Screen {
 
     private Stage stage;
     private Texture backgroundTexture;
+    private Texture levierTexture;
+    private Texture machineTexture;
 
-    @Override public void show() {
+    private GameMechanic gameMechanic;
+
+    @Override
+    public void show() {
         System.out.println("L'écran est affiché !");
+
+        gameMechanic = new GameMechanic();
 
         stage = new Stage(new FitViewport(480,  270));
 
@@ -26,6 +37,25 @@ public class GameScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
+
+        levierTexture = new Texture(Gdx.files.internal("levier.png"));
+        machineTexture = new Texture(Gdx.files.internal("gamblingMachine.png"));
+
+        TextureRegionDrawable dessinLevier = new TextureRegionDrawable(levierTexture);
+        TextureRegionDrawable dessinMachine = new TextureRegionDrawable(machineTexture);
+
+        ImageButton boutonLevier = new ImageButton(dessinLevier);
+        Image machineImage = new Image(dessinMachine);
+
+        boutonLevier.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameMechanic.tirage();
+            }
+        });
+
+        table.add(machineImage);
+        table.add(boutonLevier);
 
         Gdx.input.setInputProcessor(stage);
     }
