@@ -17,7 +17,7 @@ public class GameMechanic {
         int case2 = random.nextInt(3) + 1;
         int case3 = random.nextInt(3) + 1;
 
-        System.out.println(case3);
+        System.out.println(case1 + " " + case2 + " " + case3 );
     }
 
 }
