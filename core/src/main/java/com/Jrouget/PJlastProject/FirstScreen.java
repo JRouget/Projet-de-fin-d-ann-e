@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
@@ -16,14 +17,17 @@ import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+
+import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
 public class FirstScreen implements Screen {
     private MainGame game;
 
     private Stage stage;
+    private Texture backgroundTexture;
     private Texture textureBouton;
     private Texture textureBoutonClicked;
-    private Texture backgroundTexture;
     private Timer changementScene;
 
     public FirstScreen(MainGame game) {
@@ -46,19 +50,18 @@ public class FirstScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-
         textureBouton = new Texture(Gdx.files.internal("bouton.png"));
         textureBoutonClicked = new Texture(Gdx.files.internal("boutonClicked.png"));
+
         TextureRegionDrawable dessinBouton = new TextureRegionDrawable(textureBouton);
         TextureRegionDrawable dessinBoutonClicked = new TextureRegionDrawable(textureBoutonClicked);
 
         ImageButton boutonDemarrer = new ImageButton(dessinBouton, dessinBoutonClicked);
 
-
         boutonDemarrer.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                System.out.println("Game begin..");
+                System.out.println("Game starting..");
                 game.setScreen(new GameScreen());
             }
         });

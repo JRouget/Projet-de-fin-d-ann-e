@@ -16,9 +16,7 @@ public class GameScreen implements Screen {
 
     private Stage stage;
     private Texture backgroundTexture;
-    private Texture levierTexture;
-    private Texture machineTexture;
-
+    private MachineSous machineSous;
     private GameMechanic gameMechanic;
 
     @Override
@@ -38,33 +36,9 @@ public class GameScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        levierTexture = new Texture(Gdx.files.internal("levier.png"));
-        machineTexture = new Texture(Gdx.files.internal("gamblingMachine.png"));
+        machineSous = new MachineSous(gameMechanic);
 
-        TextureRegionDrawable dessinLevier = new TextureRegionDrawable(levierTexture);
-        TextureRegionDrawable dessinMachine = new TextureRegionDrawable(machineTexture);
-
-        ImageButton boutonLevier = new ImageButton(dessinLevier);
-        Image machineImage = new Image(dessinMachine);
-
-        com.badlogic.gdx.scenes.scene2d.Group machineComplete = new com.badlogic.gdx.scenes.scene2d.Group();
-
-        machineComplete.setSize(200,150);
-
-        boutonLevier.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ChangeListener() {
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                gameMechanic.tirage();
-            }
-        });
-
-        machineComplete.addActor(machineImage);
-        machineComplete.addActor(boutonLevier);
-
-        machineImage.setPosition(130, 0);
-        boutonLevier.setPosition(255, 50);
-
-        table.add(machineComplete);
+        table.add(machineSous);
 
         Gdx.input.setInputProcessor(stage);
     }
