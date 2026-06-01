@@ -47,6 +47,10 @@ public class GameScreen implements Screen {
         ImageButton boutonLevier = new ImageButton(dessinLevier);
         Image machineImage = new Image(dessinMachine);
 
+        com.badlogic.gdx.scenes.scene2d.Group machineComplete = new com.badlogic.gdx.scenes.scene2d.Group();
+
+        machineComplete.setSize(200,150);
+
         boutonLevier.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -54,8 +58,13 @@ public class GameScreen implements Screen {
             }
         });
 
-        table.add(machineImage);
-        table.add(boutonLevier);
+        machineComplete.addActor(machineImage);
+        machineComplete.addActor(boutonLevier);
+
+        machineImage.setPosition(130, 0);
+        boutonLevier.setPosition(255, 50);
+
+        table.add(machineComplete);
 
         Gdx.input.setInputProcessor(stage);
     }
