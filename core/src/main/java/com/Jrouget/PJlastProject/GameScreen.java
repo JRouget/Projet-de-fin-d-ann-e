@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
+
 public class GameScreen implements Screen {
 
     private Stage stage;
@@ -22,26 +24,30 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         System.out.println("L'écran est affiché !");
-
         gameMechanic = new GameMechanic();
-
         stage = new Stage(new FitViewport(480,  270));
 
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundTapis1.png"));
+        creerFond();
+        creerInterface();
 
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    private void creerFond() {
+        backgroundTexture = new Texture(Gdx.files.internal("backgroundTapis1.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
+    }
 
+    private void creerInterface() {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
 
         machineSous = new MachineSous(gameMechanic);
-
         table.add(machineSous);
-
-        Gdx.input.setInputProcessor(stage);
     }
+
 
     @Override
     public void render(float delta) {

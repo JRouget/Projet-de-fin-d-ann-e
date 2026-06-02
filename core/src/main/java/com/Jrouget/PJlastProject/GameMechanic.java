@@ -19,5 +19,4 @@ public class GameMechanic {
 
         System.out.println(case1 + " " + case2 + " " + case3 );
     }
-
 }

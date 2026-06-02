@@ -6,29 +6,20 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.widget.VisTextButton;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-
-import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.actor;
 
 public class FirstScreen implements Screen {
     private MainGame game;
 
-    private Stage stage;
-    private Texture backgroundTexture;
     private Texture textureBouton;
     private Texture textureBoutonClicked;
-    private Timer changementScene;
+    private Texture backgroundTexture;
+    private Stage stage;
 
     public FirstScreen(MainGame game) {
         this.game = game;
@@ -38,14 +29,21 @@ public class FirstScreen implements Screen {
     public void show() {
         if (!VisUI.isLoaded()) {
             VisUI.load();
+
+            stage = new com.badlogic.gdx.scenes.scene2d.Stage(new FitViewport(480,  270));
+
+            creerFond();
+            creerInterface();
         }
-        stage = new Stage(new FitViewport(480,  270));
+    }
 
+    private void creerFond(){
         backgroundTexture = new Texture(Gdx.files.internal("backgroundTapis1.png"));
-
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
+    }
 
+    private void creerInterface() {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -65,10 +63,10 @@ public class FirstScreen implements Screen {
                 game.setScreen(new GameScreen());
             }
         });
-
         table.add(boutonDemarrer);
 
         Gdx.input.setInputProcessor(stage);
+
     }
 
     @Override
