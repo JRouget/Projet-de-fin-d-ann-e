@@ -4,12 +4,18 @@ import java.util.Random;
 
 public class GameMechanic {
     private Integer resultat;
-    private Integer case1;
-    private Integer case2;
-    private Integer case3;
     private Random random;
+    private int soldeJoueur = 100;
+    private final int coutTirage = 10;
+
+    public boolean peutJouer(){
+        return soldeJoueur >= coutTirage;
+    }
 
     public void tirage(){
+
+        soldeJoueur -= coutTirage;
+        System.out.println("Player's balance : " + soldeJoueur);
 
         random = new Random();
 
