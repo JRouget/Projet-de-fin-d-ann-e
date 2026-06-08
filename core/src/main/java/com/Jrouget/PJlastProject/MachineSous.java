@@ -1,6 +1,7 @@
 package com.Jrouget.PJlastProject;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -9,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class MachineSous extends Group {
+
+    private MainGame game;
 
     private Texture levierTexture;
     private Texture machineTexture;
@@ -21,9 +24,12 @@ public class MachineSous extends Group {
     private Image roll2;
     private Image roll3;
 
-    public MachineSous (final GameMechanic gameMechanic) {
+    private SideMenu sideMenu;
 
+    public MachineSous (final GameMechanic gameMechanic, SideMenu menu) {
+        this.sideMenu = menu;
         this.setSize(300, 150);
+
         //Assets of the GB
         levierTexture = new Texture(Gdx.files.internal("levier.png"));
         machineTexture = new Texture(Gdx.files.internal("gamblingMachine.png"));
@@ -51,8 +57,15 @@ public class MachineSous extends Group {
                     int[] resultats = gameMechanic.tirage();
 
                     afficherResultat(resultats[0], resultats[1], resultats[2]);
+
+                    sideMenu.rafraichirArgent(gameMechanic.getsoldeJoueur());
+                    sideMenu.rafraichirScore(gameMechanic.getScore());
+                    sideMenu.rafraichirQuota(gameMechanic.getQuota());
+                    sideMenu.rafraichirManche(gameMechanic.getManche());
+                    sideMenu.rafraichirTirage(gameMechanic.getTirage());
                 }else {
                     System.out.println("Morricio.. I can't move it move it anymore...");
+                    game.setScreen(new FirstScreen(game));
                 }
             }
         });
@@ -82,7 +95,6 @@ public class MachineSous extends Group {
         if (chiffre == 1) return apple;
         else if (chiffre == 2) return orange;
         else return seven;
-
     }
 
     public void dispose() {

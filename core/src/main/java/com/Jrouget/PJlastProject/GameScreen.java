@@ -4,27 +4,24 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-
-import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
 
 public class GameScreen implements Screen {
 
     private Stage stage;
     private Texture backgroundTexture;
     private MachineSous machineSous;
+    private SideMenu sideMenu;
     private GameMechanic gameMechanic;
 
     @Override
     public void show() {
-        System.out.println("L'écran est affiché !");
+        System.out.println("Game started");
         gameMechanic = new GameMechanic();
+        sideMenu = new SideMenu(gameMechanic);
+
         stage = new Stage(new FitViewport(480,  270));
 
         creerFond();
@@ -44,8 +41,10 @@ public class GameScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        machineSous = new MachineSous(gameMechanic);
+        machineSous = new MachineSous(gameMechanic, sideMenu);
+
         table.add(machineSous);
+        table.add(sideMenu);
     }
 
 
