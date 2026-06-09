@@ -1,0 +1,30 @@
+core/build.gradle
+  s_f64ec65eb4c6e8::t_dd93448f38bdb9 1-2
+  s_f64ec65eb4c6e8::t_2dc3c69fc7369a 3-8
+build.gradle
+  h_0a88d9aba8622a 34
+  s_f64ec65eb4c6e8::t_cd9958893dc9e4 35-38
+settings.gradle
+  h_0a88d9aba8622a 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "1f00abe184a254e543b3ca7decd0914e53dc6e0a",
+  "prompts": {},
+  "humans": {
+    "h_0a88d9aba8622a": {
+      "author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_f64ec65eb4c6e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a02f06ba-9a31-4822-b8a4-414ffa33da61",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  }
+}
