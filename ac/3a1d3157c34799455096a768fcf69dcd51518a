@@ -1,0 +1,19 @@
+.github/workflows/ci.yml
+  s_a75cc9c391da43::t_ea2736f6713185 1-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ac3a1d3157c34799455096a768fcf69dcd51518a",
+  "prompts": {},
+  "sessions": {
+    "s_a75cc9c391da43": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "de2a9bad-f9da-4a84-83e4-2038753254bd",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Yoan Thirion <yoan.thirion@gmail.com>"
+    }
+  }
+}
