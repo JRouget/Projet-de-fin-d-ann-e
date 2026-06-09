@@ -21,27 +21,6 @@ gradle-app.setting
 hs_err_pid*
 .attach_pid*
 
-## Android:
-/android/libs/armeabi-v7a/
-/android/libs/arm64-v8a/
-/android/libs/x86/
-/android/libs/x86_64/
-/android/gen/
-/android/out/
-local.properties
-com_crashlytics_export_strings.xml
-
-## Robovm:
-/ios/robovm-build/
-
-## iOS:
-/ios/xcode/*.xcodeproj/*
-!/ios/xcode/*.xcodeproj/xcshareddata
-!/ios/xcode/*.xcodeproj/project.pbxproj
-/ios/xcode/native/
-/ios/IOSLauncher.app
-/ios/IOSLauncher.app.dSYM
-
 ## GWT:
 /html/war/
 /html/gwt-unitCache/
