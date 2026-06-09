@@ -1,5 +1,6 @@
 package com.Jrouget.PJlastProject;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,11 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class MachineSous extends Group {
-
-    private MainGame game;
 
     private Texture levierTexture;
     private Texture machineTexture;
@@ -50,7 +50,7 @@ public class MachineSous extends Group {
         roll2 = new Image(apple);
         roll3 = new Image(seven);
 
-        boutonLevier.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ChangeListener() {
+        boutonLevier.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if(gameMechanic.peutJouer()){
@@ -65,17 +65,18 @@ public class MachineSous extends Group {
                     sideMenu.rafraichirTirage(gameMechanic.getTirage());
                 }else {
                     System.out.println("Morricio.. I can't move it move it anymore...");
-                    game.setScreen(new FirstScreen(game));
+                    MainGame myGame = (MainGame) Gdx.app.getApplicationListener();
+                    myGame.setScreen(new GameOverScreen());
                 }
             }
         });
 
-        machineImage.setPosition(150, 0);
-        boutonLevier.setPosition(275, 50);
+        machineImage.setPosition(170, 0);
+        boutonLevier.setPosition(295, 60);
 
-        roll1.setPosition(170, 57);
-        roll2.setPosition(202,57);
-        roll3.setPosition(233,57);
+        roll1.setPosition(190, 57);
+        roll2.setPosition(222,57);
+        roll3.setPosition(253,57);
 
         this.addActor(machineImage);
         this.addActor(boutonLevier);

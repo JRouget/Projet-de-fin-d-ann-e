@@ -30,7 +30,7 @@ public class SideMenu extends Group {
 
         imageSideMenu.setSize(120, 270);
 
-        imageSideMenu.setPosition(70, -35);
+        imageSideMenu.setPosition(80, -35);
 
         this.addActor(imageSideMenu);
 
@@ -48,7 +48,7 @@ public class SideMenu extends Group {
         affichageQuota.setPosition(150,170);
         affichageArgent.setPosition(100, 150);
         affichageManche.setPosition(150, 150);
-        affichageTirage.setPosition(200, 100);
+        affichageTirage.setPosition(150, 100);
 
         this.addActor(affichageScore);
         this.addActor(affichageQuota);
