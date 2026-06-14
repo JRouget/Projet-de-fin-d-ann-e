@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import java.io.PrintStream;
+
 public class MachineSous extends Group {
 
     private Texture levierTexture;
@@ -26,9 +28,13 @@ public class MachineSous extends Group {
 
     private SideMenu sideMenu;
 
-    public MachineSous (final GameMechanic gameMechanic, SideMenu menu) {
+    private ShopScreen shopScreen;
+
+    public MachineSous (final GameMechanic gameMechanic, SideMenu menu, ShopScreen shopScreen) {
         this.sideMenu = menu;
         this.setSize(300, 150);
+
+        this.shopScreen = shopScreen;
 
         //Assets of the GB
         levierTexture = new Texture(Gdx.files.internal("levier.png"));
@@ -54,6 +60,8 @@ public class MachineSous extends Group {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if(gameMechanic.peutJouer()){
+                    int mancheAvant = gameMechanic.getManche();
+
                     int[] resultats = gameMechanic.tirage();
 
                     afficherResultat(resultats[0], resultats[1], resultats[2]);
@@ -63,6 +71,13 @@ public class MachineSous extends Group {
                     sideMenu.rafraichirQuota(gameMechanic.getQuota());
                     sideMenu.rafraichirManche(gameMechanic.getManche());
                     sideMenu.rafraichirTirage(gameMechanic.getTirage());
+
+                    if(gameMechanic.getManche() > mancheAvant) {
+                        System.out.println("Shop opening...");
+                        gameMechanic.getsoldeJoueur();
+                        shopScreen.setVisible(true);
+                    }
+
                 }else {
                     System.out.println("Morricio.. I can't move it move it anymore...");
                     MainGame myGame = (MainGame) Gdx.app.getApplicationListener();

@@ -8,21 +8,30 @@ public class GameMechanic {
     private final int coutTirage = 1;
 
     private int mancheActuelle = 1;
-    private int quotaManche = 50;
+    private int quotaManche = 1;
     private int coef;
     private int score;
 
     private int recompense = 100;
     private int tirage = 10;
 
+    private int probaApple = 60;
+    private int probaOrange = 30;
+    private int probaSeven = 10;
+
+    private int proba;
+
     private int case1;
     private int case2;
     private int case3;
 
+    private ShopScreen shopScreen;
+
     private Random random = new Random();
 
     public boolean peutJouer(){
-        return tirage > coutTirage;
+
+        return tirage >= coutTirage;
     }
 
     public int[] tirage(){
@@ -30,9 +39,9 @@ public class GameMechanic {
         tirage -= coutTirage;
         System.out.println("Player's balance : " + soldeJoueur);
 
-        case1 = random.nextInt(3) + 1;
-        case2 = random.nextInt(3) + 1;
-        case3 = random.nextInt(3) + 1;
+        case1 = generateSymbol();
+        case2 = generateSymbol();
+        case3 = generateSymbol();
 
         coef = multiplicateur();
 
@@ -45,13 +54,24 @@ public class GameMechanic {
         return new int[]{case1, case2, case3};
     }
 
+    public int generateSymbol() {
+        proba = random.nextInt(100);
+        if (proba < probaApple) {
+            return 1;
+        } else if (proba < probaOrange + probaApple) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+
     public void win() {
         if (score >= quotaManche){
             quotaManche += quotaManche;
             mancheActuelle += 1;
             soldeJoueur += recompense;
             recompense += 50;
-            tirage += tirage + 5;
+            tirage = 10;
             score = 0;
         }
     }

@@ -44,11 +44,11 @@ public class SideMenu extends Group {
         affichageManche = new Label(String.valueOf(gameMechanic.getManche()), style);
         affichageTirage = new Label(String.valueOf(gameMechanic.getTirage()), style);
 
-        affichageScore.setPosition(100, 170);
-        affichageQuota.setPosition(150,170);
-        affichageArgent.setPosition(100, 150);
-        affichageManche.setPosition(150, 150);
-        affichageTirage.setPosition(150, 100);
+        affichageScore.setPosition(135, 170);
+        affichageQuota.setPosition(150,115);
+        affichageArgent.setPosition(120, 25);
+        affichageManche.setPosition(135, 135);
+        affichageTirage.setPosition(150, 65);
 
         this.addActor(affichageScore);
         this.addActor(affichageQuota);

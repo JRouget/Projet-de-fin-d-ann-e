@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -42,12 +43,15 @@ public class GameScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        machineSous = new MachineSous(gameMechanic, sideMenu);
+        ShopScreen shopScreen = new ShopScreen(gameMechanic);
+
+        machineSous = new MachineSous(gameMechanic, sideMenu, shopScreen);
         combosAffichage = new CombosAffichage();
 
         table.add(combosAffichage);
         table.add(machineSous);
         table.add(sideMenu);
+        stage.addActor(shopScreen);
     }
 
 
