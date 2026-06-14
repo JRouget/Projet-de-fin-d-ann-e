@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class GameMechanic {
     private Integer resultat;
-    private int soldeJoueur = 100;
+    private int soldeJoueur = 0;
     private final int coutTirage = 1;
 
     private int mancheActuelle = 1;
@@ -74,6 +74,10 @@ public class GameMechanic {
             tirage = 10;
             score = 0;
         }
+    }
+
+    public void buying(int price) {
+        this.soldeJoueur -= price;
     }
 
     public int getsoldeJoueur() {

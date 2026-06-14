@@ -30,7 +30,7 @@ public class ShopScreen  extends Group {
     private Label.LabelStyle style;
 
     private Texture textureExitButton;
-    private Texture getTextureExitButtonClicked;
+    private Texture textureExitButtonClicked;
 
     private ShopItems item1, item2, item3;
     private Label priceSlot1, priceSlot2,  priceSlot3;
@@ -41,7 +41,7 @@ public class ShopScreen  extends Group {
     private Label infoName;
     private Label infoDescription;
 
-    private Texture buyButton;
+    private Texture textureBuyButton;
 
     public ShopScreen(GameMechanic gameMechanic) {
 
@@ -54,14 +54,24 @@ public class ShopScreen  extends Group {
 
         shopBackground = new Texture(Gdx.files.internal("shopFond.png"));
         textureExitButton = new Texture(Gdx.files.internal("exitButton.png"));
-        getTextureExitButtonClicked = new Texture(Gdx.files.internal("exitButtonClicked.png"));
+        textureExitButtonClicked = new Texture(Gdx.files.internal("exitButtonClicked.png"));
+        textureBuyButton = new Texture(Gdx.files.internal("buyButton.png"));
 
         Image background = new Image(shopBackground);
 
         TextureRegionDrawable drawExitButton = new TextureRegionDrawable(textureExitButton);
-        TextureRegionDrawable drawExitButtonClicked = new TextureRegionDrawable(getTextureExitButtonClicked);
+        TextureRegionDrawable drawExitButtonClicked = new TextureRegionDrawable(textureExitButtonClicked);
+        TextureRegionDrawable drawBuyButton = new TextureRegionDrawable(textureBuyButton);
 
         ImageButton exitButton = new ImageButton(drawExitButton, drawExitButtonClicked);
+        ImageButton buyButton1 = new ImageButton(drawBuyButton);
+        ImageButton buyButton2 = new ImageButton(drawBuyButton);
+        ImageButton buyButton3 = new ImageButton(drawBuyButton);
+
+        buyButton1.setPosition(20,30);
+        buyButton2.setPosition(122,30);
+        buyButton3.setPosition(223,30);
+
 
         showSold = new Label(String.valueOf(gameMechanic.getsoldeJoueur()), style);
 
@@ -76,9 +86,73 @@ public class ShopScreen  extends Group {
                 setVisible(false);
             }
         });
+
+        buyButton1.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (item1 != null && gameMechanic.getsoldeJoueur() >= item1.getPrice()) {
+                    System.out.println("buying" + item1.getName());
+
+                    gameMechanic.buying(item1.getPrice());
+
+                    item1.boost(gameMechanic);
+
+                    showSold.setText(String.valueOf(gameMechanic.getsoldeJoueur()));
+
+                    buyButton1.setVisible(false);
+                    imageSlot1.setVisible(false);
+                    priceSlot1.setText("Vendu");
+                }
+            }
+        });
+
+        buyButton2.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (item2 != null && gameMechanic.getsoldeJoueur() >= item2.getPrice()) {
+                    System.out.println("buying" + item2.getName());
+
+                    gameMechanic.buying(item2.getPrice());
+
+                    item2.boost(gameMechanic);
+
+                    showSold.setText(String.valueOf(gameMechanic.getsoldeJoueur()));
+
+
+                    buyButton2.setVisible(false);
+                    imageSlot2.setVisible(false);
+                    priceSlot2.setText("Vendu");
+                }
+            }
+        });
+
+        buyButton3.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (item3 != null && gameMechanic.getsoldeJoueur() >= item3.getPrice()) {
+                    System.out.println("buying" + item3.getName());
+
+                    gameMechanic.buying(item3.getPrice());
+
+                    item3.boost(gameMechanic);
+
+                    showSold.setText(String.valueOf(gameMechanic.getsoldeJoueur()));
+
+
+                    buyButton3.setVisible(false);
+                    imageSlot3.setVisible(false);
+                    priceSlot3.setText("Vendu");
+                }
+            }
+        });
+
         this.addActor(background);
         this.addActor(exitButton);
         this.addActor(showSold);
+
+        this.addActor(buyButton1);
+        this.addActor(buyButton2);
+        this.addActor(buyButton3);
 
         createShopItems();
 
@@ -196,7 +270,7 @@ public class ShopScreen  extends Group {
         this.setVisible(false);
     }
 
-    public void refreshShop() {
+    public void refreshShop(GameMechanic gameMechanic) {
         List<ShopItems> catalogue = Arrays.asList(ShopItems.values());
         Collections.shuffle(catalogue);
 
@@ -215,5 +289,7 @@ public class ShopScreen  extends Group {
         priceSlot1.setText(item1.getPrice());
         priceSlot2.setText(item2.getPrice());
         priceSlot3.setText(item3.getPrice());
+
+        showSold.setText(String.valueOf(gameMechanic.getsoldeJoueur()));
     }
 }
