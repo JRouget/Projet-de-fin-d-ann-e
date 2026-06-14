@@ -108,4 +108,16 @@ public class GameMechanic {
         }
         return 1;
     }
+
+    public void boosterApple(int bonus) {
+        this.probaApple += bonus;
+    }
+
+    public void boosterOrange(int bonus) {
+        this.probaOrange += bonus;
+    }
+
+    public void boosterSeven(int bonus) {
+        this.probaSeven += bonus;
+    }
 }

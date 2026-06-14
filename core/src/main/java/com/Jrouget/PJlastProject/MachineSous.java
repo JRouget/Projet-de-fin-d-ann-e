@@ -75,6 +75,7 @@ public class MachineSous extends Group {
                     if(gameMechanic.getManche() > mancheAvant) {
                         System.out.println("Shop opening...");
                         gameMechanic.getsoldeJoueur();
+                        shopScreen.refreshShop();
                         shopScreen.setVisible(true);
                     }
 
