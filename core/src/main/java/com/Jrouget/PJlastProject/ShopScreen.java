@@ -42,6 +42,7 @@ public class ShopScreen  extends Group {
     private Label infoDescription;
 
     private Texture textureBuyButton;
+    private ImageButton buyButton1, buyButton2, buyButton3;
 
     public ShopScreen(GameMechanic gameMechanic) {
 
@@ -64,14 +65,14 @@ public class ShopScreen  extends Group {
         TextureRegionDrawable drawBuyButton = new TextureRegionDrawable(textureBuyButton);
 
         ImageButton exitButton = new ImageButton(drawExitButton, drawExitButtonClicked);
-        ImageButton buyButton1 = new ImageButton(drawBuyButton);
-        ImageButton buyButton2 = new ImageButton(drawBuyButton);
-        ImageButton buyButton3 = new ImageButton(drawBuyButton);
+
+        buyButton1 = new ImageButton(drawBuyButton);
+        buyButton2 = new ImageButton(drawBuyButton);
+        buyButton3 = new ImageButton(drawBuyButton);
 
         buyButton1.setPosition(20,30);
         buyButton2.setPosition(122,30);
         buyButton3.setPosition(223,30);
-
 
         showSold = new Label(String.valueOf(gameMechanic.getsoldeJoueur()), style);
 
@@ -174,7 +175,6 @@ public class ShopScreen  extends Group {
         infoName.setPosition(10,35);
         infoDescription.setPosition(10,10);
 
-
         priceSlot1 = new Label("", style);
         priceSlot2 = new Label("", style);
         priceSlot3 = new Label("", style);
@@ -245,7 +245,7 @@ public class ShopScreen  extends Group {
                 if (pointer == -1 && item3 != null) {
                     infoName.setText(item3.getName());
                     infoDescription.setText(item3.getDescription());
-                    infoPopup.setPosition(imageSlot3.getX() - 80, imageSlot3.getY() - 60); // Décalé à gauche pour ne pas sortir de l'écran
+                    infoPopup.setPosition(imageSlot3.getX() - 10, imageSlot3.getY() - 60);
                     infoPopup.setVisible(true);
                 }
             }
@@ -289,6 +289,18 @@ public class ShopScreen  extends Group {
         priceSlot1.setText(item1.getPrice());
         priceSlot2.setText(item2.getPrice());
         priceSlot3.setText(item3.getPrice());
+
+        imageSlot1.setVisible(true);
+        imageSlot2.setVisible(true);
+        imageSlot3.setVisible(true);
+
+        priceSlot1.setVisible(true);
+        priceSlot2.setVisible(true);
+        priceSlot3.setVisible(true);
+
+        buyButton1.setVisible(true);
+        buyButton2.setVisible(true);
+        buyButton3.setVisible(true);
 
         showSold.setText(String.valueOf(gameMechanic.getsoldeJoueur()));
     }
