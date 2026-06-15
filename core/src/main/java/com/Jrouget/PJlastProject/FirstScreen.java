@@ -22,6 +22,7 @@ public class FirstScreen implements Screen {
     private Stage stage;
 
     public FirstScreen(MainGame game) {
+
         this.game = game;
     }
 
@@ -29,16 +30,16 @@ public class FirstScreen implements Screen {
     public void show() {
         if (!VisUI.isLoaded()) {
             VisUI.load();
-
-            stage = new com.badlogic.gdx.scenes.scene2d.Stage(new FitViewport(480,  270));
-
-            creerFond();
-            creerInterface();
         }
+
+        stage = new com.badlogic.gdx.scenes.scene2d.Stage(new FitViewport(480,  270));
+
+        creerFond();
+        creerInterface();
     }
 
     private void creerFond(){
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundTapis1.png"));
+        backgroundTexture = new Texture(Gdx.files.internal("backgroundFirstScreen.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }
@@ -55,6 +56,8 @@ public class FirstScreen implements Screen {
         TextureRegionDrawable dessinBoutonClicked = new TextureRegionDrawable(textureBoutonClicked);
 
         ImageButton boutonDemarrer = new ImageButton(dessinBouton, dessinBoutonClicked);
+
+        table.setPosition(0,-40);
 
         boutonDemarrer.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ChangeListener() {
             @Override
@@ -80,24 +83,24 @@ public class FirstScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        if(width <= 0 || height <= 0) return;
-
-        stage.getViewport().update(width, height, true);
+        if (stage != null) {
+            stage.getViewport().update(width, height, true);
+        }
     }
 
     @Override
     public void pause() {
-        // Invoked when your application is paused.
+
     }
 
     @Override
     public void resume() {
-        // Invoked when your application is resumed after pause.
+
     }
 
     @Override
     public void hide() {
-        // This method is called when another screen replaces this one.
+
     }
 
     @Override

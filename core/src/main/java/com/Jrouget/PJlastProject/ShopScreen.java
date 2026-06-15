@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.utils.ArraySelection;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -44,12 +43,13 @@ public class ShopScreen  extends Group {
     private Texture textureBuyButton;
     private ImageButton buyButton1, buyButton2, buyButton3;
 
-    public ShopScreen(GameMechanic gameMechanic) {
+    public ShopScreen(GameMechanic gameMechanic, SideMenu sideMenu) {
 
         font = new BitmapFont();
         style = new Label.LabelStyle();
         style.font = font;
         style.fontColor = Color.WHITE;
+
 
         this.setSize(300,200);
 
@@ -84,6 +84,12 @@ public class ShopScreen  extends Group {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 System.out.println("shop closing");
+
+                gameMechanic.prepareNewRound();
+
+                sideMenu.rafraichirTirage(gameMechanic.getTirage());
+                sideMenu.rafraichirArgent(gameMechanic.getsoldeJoueur());
+
                 setVisible(false);
             }
         });
@@ -103,6 +109,9 @@ public class ShopScreen  extends Group {
                     buyButton1.setVisible(false);
                     imageSlot1.setVisible(false);
                     priceSlot1.setText("Vendu");
+
+                    sideMenu.rafraichirTirage(gameMechanic.getTirage());
+                    sideMenu.rafraichirArgent(gameMechanic.getsoldeJoueur());
                 }
             }
         });
@@ -123,6 +132,9 @@ public class ShopScreen  extends Group {
                     buyButton2.setVisible(false);
                     imageSlot2.setVisible(false);
                     priceSlot2.setText("Vendu");
+
+                    sideMenu.rafraichirTirage(gameMechanic.getTirage());
+                    sideMenu.rafraichirArgent(gameMechanic.getsoldeJoueur());
                 }
             }
         });
@@ -143,6 +155,9 @@ public class ShopScreen  extends Group {
                     buyButton3.setVisible(false);
                     imageSlot3.setVisible(false);
                     priceSlot3.setText("Vendu");
+
+                    sideMenu.rafraichirTirage(gameMechanic.getTirage());
+                    sideMenu.rafraichirArgent(gameMechanic.getsoldeJoueur());
                 }
             }
         });

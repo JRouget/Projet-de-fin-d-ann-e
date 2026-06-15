@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -43,7 +42,7 @@ public class GameScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        ShopScreen shopScreen = new ShopScreen(gameMechanic);
+        ShopScreen shopScreen = new ShopScreen(gameMechanic, sideMenu);
 
         machineSous = new MachineSous(gameMechanic, sideMenu, shopScreen);
         combosAffichage = new CombosAffichage();
@@ -66,7 +65,9 @@ public class GameScreen implements Screen {
     }
 
     @Override public void resize(int width, int height) {
-
+        if (stage != null) {
+            stage.getViewport().update(width, height, true);
+        }
     }
     @Override public void pause() {
 

@@ -8,7 +8,8 @@ public enum ShopItems {
     SUPER_VERGER("Super Verger", "+30 chances de Pomme", 35, "APPLE", 30, "goldApple.png"),
     ZESTE_CHANCEUX("Zeste Chanceux", "+10 chances d'Orange", 40, "ORANGE", 10, "goldOrange.png"),
     TREFLE_DORE("Trèfle Doré", "+5 chances de Seven", 60, "SEVEN", 5, "goldSeven.png"),
-    DE_DIVIN("Dé Divin", "+8 chances de Seven", 90, "SEVEN", 8, "divineSeven.png");
+    DE_DIVIN("Dé Divin", "+8 chances de Seven", 90, "SEVEN", 8, "divineSeven.png"),
+    TIRAGE("Tirage", "+5 Tirage", 100, "TIRAGE", 5, "ticket.png");
 
     private String name;
     private String description;
@@ -33,6 +34,8 @@ public enum ShopItems {
             gameMechanic.boosterOrange(value);
         } else if (effectType.equals("SEVEN")) {
             gameMechanic.boosterSeven(value);
+        } else if (effectType.equals("TIRAGE")) {
+            gameMechanic.bonusTirage(value);
         }
     }
 
