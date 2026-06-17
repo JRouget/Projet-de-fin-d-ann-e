@@ -81,7 +81,7 @@ public class MachineSous extends Group {
                 }else {
                     System.out.println("Morricio.. I can't move it move it anymore...");
                     MainGame game = (MainGame) Gdx.app.getApplicationListener();
-                    game.setScreen(new GameOverScreen(game));
+                    game.setScreen(new GameOverScreen(game, gameMechanic.getManche()));
                 }
             }
         });

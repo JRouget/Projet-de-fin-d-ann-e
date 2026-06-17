@@ -21,7 +21,9 @@ public class GameOverScreen implements Screen {
     private Texture textureButtonReplay;
     private Texture textureButtonReplayClicked;
 
-    public GameOverScreen(MainGame game) {
+    private int finalRound;
+
+    public GameOverScreen(MainGame game, int finalRound) {
         this.game = game;
     }
 

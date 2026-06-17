@@ -11,15 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisTextField;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class AuthScreen implements Screen {
 
@@ -30,7 +26,9 @@ public class AuthScreen implements Screen {
 
     private Texture backgroundTexture;
     private Texture loginButtonTexture;
-    private Texture getLoginButtonTextureClicked;
+    private Texture LoginButtonTextureClicked;
+    private Texture guestButtonTexture;
+    private Texture guestButtonClickedTexture;
 
     private String ApiResponse;
 
@@ -62,12 +60,17 @@ public class AuthScreen implements Screen {
         stage.addActor(table);
 
         loginButtonTexture = new Texture(Gdx.files.internal("loginButton.png"));
-        getLoginButtonTextureClicked = new Texture(Gdx.files.internal("loginButtonClicked.png"));
+        LoginButtonTextureClicked = new Texture(Gdx.files.internal("loginButtonClicked.png"));
+        guestButtonTexture = new Texture(Gdx.files.internal("guestButton.png"));
+        guestButtonClickedTexture = new Texture(Gdx.files.internal("guestButtonClicked.png"));
 
         TextureRegionDrawable loginButtonDraw = new TextureRegionDrawable(loginButtonTexture);
-        TextureRegionDrawable loginButtonClickedDraw = new TextureRegionDrawable(getLoginButtonTextureClicked);
+        TextureRegionDrawable loginButtonClickedDraw = new TextureRegionDrawable(LoginButtonTextureClicked);
+        TextureRegionDrawable guestButtonDraw = new TextureRegionDrawable(guestButtonTexture);
+        TextureRegionDrawable guestButtonClickedDraw = new TextureRegionDrawable(guestButtonClickedTexture);
 
         ImageButton loginButton = new ImageButton(loginButtonDraw, loginButtonClickedDraw);
+        ImageButton guestButton = new ImageButton(guestButtonDraw, guestButtonClickedDraw);
 
         emailField = new VisTextField("");
         emailField.setMessageText("Email");
@@ -81,6 +84,15 @@ public class AuthScreen implements Screen {
         table.add(emailField).width(200).padBottom(10).row();
         table.add(passwordField).width(200).padBottom(15).row();
         table.add(loginButton);
+
+        stage.addActor(guestButton);
+
+        guestButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                game.setScreen(new FirstScreen(game));
+            }
+        });
 
         loginButton.addListener(new ChangeListener() {
             @Override
