@@ -8,7 +8,7 @@ public class GameMechanic {
     private final int coutTirage = 1;
 
     private int mancheActuelle = 1;
-    private int quotaManche = 100;
+    private int quotaManche = 1;
     private int coef;
     private int score;
 
@@ -59,7 +59,7 @@ public class GameMechanic {
         proba = random.nextInt(100);
         if (proba < probaApple) {
             return 1;
-        } else if (proba < probaOrange + probaApple) {
+        } else if (proba > probaApple && proba < probaOrange + probaApple) {
             return 2;
         } else {
             return 3;
