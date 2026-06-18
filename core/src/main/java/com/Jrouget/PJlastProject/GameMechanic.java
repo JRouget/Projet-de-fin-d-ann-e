@@ -8,13 +8,13 @@ public class GameMechanic {
     private final int coutTirage = 1;
 
     private int mancheActuelle = 1;
-    private int quotaManche = 50;
+    private int quotaManche = 20;
     private int coef;
     private int score;
 
     private int recompense = 100;
     private int tirageBonus = 0;
-    private int tirage = 1;
+    private int tirage = 10;
 
     private int probaApple = 60;
     private int probaOrange = 30;

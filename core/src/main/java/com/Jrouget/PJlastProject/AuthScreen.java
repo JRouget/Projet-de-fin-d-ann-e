@@ -128,7 +128,7 @@ public class AuthScreen implements Screen {
 
                     System.out.println("Connexion successfull");
 
-                    Gdx.app.postRunnable(() -> game.setScreen(new FirstScreen(game)));
+                    verifyUsername();
                 } else {
                     System.out.println("Connexion failed" + ApiResponse);
                 }
@@ -144,6 +144,44 @@ public class AuthScreen implements Screen {
 
             }
 
+        });
+    }
+
+    private void verifyUsername() {
+        Net.HttpRequest usernameRequest = new Net.HttpRequest(Net.HttpMethods.GET);
+        usernameRequest.setUrl(game.Supabase_url + "/rest/v1/profils?select=username&user_id=eq." + game.getUserId());
+
+        usernameRequest.setHeader("apikey", MainGame.Api_key);
+        usernameRequest.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
+        usernameRequest.setHeader("Accept", "application/json");
+
+        Gdx.net.sendHttpRequest(usernameRequest, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                if (httpResponse.getStatus().getStatusCode() == 200) {
+                    String apiAnswer = httpResponse.getResultAsString();
+                    JsonValue jsonArray = new JsonReader().parse(apiAnswer);
+
+                    if (jsonArray.size > 0) {
+                        String username = jsonArray.get(0).getString("username");
+                        System.out.println("user already has a username : " + username);
+                        Gdx.app.postRunnable(() -> game.setScreen(new UsernameScreen(game)));
+                    } else {
+                        System.out.println("user doesn't have a username, please create one");
+                        Gdx.app.postRunnable(() -> game.setScreen(new UsernameScreen(game)));
+                    }
+                }
+            }
+
+            @Override
+            public void failed(Throwable throwable) {
+
+            }
+
+            @Override
+            public void cancelled() {
+
+            }
         });
     }
 

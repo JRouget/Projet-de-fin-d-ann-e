@@ -30,9 +30,11 @@ public class GameOverScreen implements Screen {
 
     private int finalRound;
     private int bestRound;
+    private String username;
 
     public GameOverScreen(MainGame game, int finalRound) {
         this.game = game;
+        this.finalRound = finalRound;
     }
 
     @Override
