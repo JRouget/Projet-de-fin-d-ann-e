@@ -3,7 +3,7 @@ package com.Jrouget.PJlastProject;
 import java.util.Random;
 
 public class GameMechanic {
-    private Integer resultat;
+
     private int soldeJoueur = 0;
     private final int coutTirage = 1;
 
@@ -14,7 +14,7 @@ public class GameMechanic {
 
     private int recompense = 100;
     private int tirageBonus = 0;
-    private int tirage = 10;
+    private int tirage = 1;
 
     private int probaApple = 60;
     private int probaOrange = 30;

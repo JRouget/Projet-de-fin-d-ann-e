@@ -17,6 +17,8 @@ import com.kotcrab.vis.ui.widget.VisTextField;
 public class UsernameScreen implements Screen {
 
     private MainGame game;
+    private SupabaseServices supabaseServices;
+
     private Stage stage;
 
     private VisTextField usernameField;
@@ -26,8 +28,9 @@ public class UsernameScreen implements Screen {
     private Texture submitButtonTexture;
     private Texture submitButtonClickedTexture;
 
-    public UsernameScreen(MainGame game) {
+    public UsernameScreen(MainGame game, SupabaseServices supabaseServices) {
         this.game = game;
+        this.supabaseServices = supabaseServices;
     }
 
     @Override
@@ -71,7 +74,8 @@ public class UsernameScreen implements Screen {
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 username = usernameField.getText().trim();
                 if (!username.isEmpty()) {
-                    saveUsername(username);
+                    supabaseServices.saveUsername(username);
+                    game.setUsername(username);
                 } else {
                     System.out.println("enter a username first");
                 }
@@ -79,41 +83,6 @@ public class UsernameScreen implements Screen {
             }
         });
         Gdx.input.setInputProcessor(stage);
-    }
-
-    private void saveUsername(String username) {
-        Net.HttpRequest usernamePost = new Net.HttpRequest(Net.HttpMethods.POST);
-        usernamePost.setUrl(game.Supabase_url + "/rest/v1/profils");
-
-        usernamePost.setHeader("apikey", MainGame.Api_key);
-        usernamePost.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
-        usernamePost.setHeader("Content-Type", "application/json");
-        usernamePost.setHeader("Prefer", "return=minimal");
-
-        String payload = "{\"user_id\": \"" + game.getUserId() + "\", \"username\": \"" + username + "\"}";
-        usernamePost.setContent(payload);
-
-        Gdx.net.sendHttpRequest(usernamePost, new Net.HttpResponseListener() {
-            @Override
-            public void handleHttpResponse(Net.HttpResponse httpResponse) {
-                if (httpResponse.getStatus().getStatusCode() == 201) {
-                    System.out.println("username stored successfully");
-                    Gdx.app.postRunnable(() -> game.setScreen(new FirstScreen(game)));
-                } else {
-                    System.out.println("error, username couldnt be stored" + httpResponse.getResultAsString());
-                }
-            }
-
-            @Override
-            public void failed(Throwable throwable) {
-                System.out.println("error" + throwable.getMessage());
-            }
-
-            @Override
-            public void cancelled() {
-
-            }
-        });
     }
 
     @Override

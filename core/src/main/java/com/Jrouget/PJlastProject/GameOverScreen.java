@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.JsonValue;
 
 public class GameOverScreen implements Screen {
     private MainGame game;
+    private SupabaseServices supabaseServices;
 
     private Stage stage;
     private Texture backgroundTexture;
@@ -34,17 +35,18 @@ public class GameOverScreen implements Screen {
 
     public GameOverScreen(MainGame game, int finalRound) {
         this.game = game;
+        this.supabaseServices = new SupabaseServices(this.game);
         this.finalRound = finalRound;
     }
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(480,  270));
+        stage = new Stage(new FitViewport(480, 270));
 
         creerFond();
         creerInterface();
 
-        getBestRound();
+        supabaseServices.getBestRound(finalRound);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -68,7 +70,7 @@ public class GameOverScreen implements Screen {
 
         ImageButton buttonReplay = new ImageButton(dessinButtonReplay, dessinButtonReplayClicked);
 
-        table.setPosition(0,-40);
+        table.setPosition(0, -40);
 
         buttonReplay.addListener(new ChangeListener() {
             @Override
@@ -81,115 +83,8 @@ public class GameOverScreen implements Screen {
 
     }
 
-    private void getBestRound() {
-        if (game.getUserJwtToken() == null) {
-            System.out.println("user not connected -> no score stored");
-            return;
-        }
-
-        Net.HttpRequest getRequest = new Net.HttpRequest(Net.HttpMethods.GET);
-        getRequest.setUrl(game.Supabase_url + "/rest/v1/high_scores?select=highest_round&user_id=eq." + game.getUserId());
-
-        getRequest.setHeader("apikey", MainGame.Api_key);
-        getRequest.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
-        getRequest.setHeader("Accept", "application/json");
-
-        Gdx.net.sendHttpRequest(getRequest, new Net.HttpResponseListener() {
-            @Override
-            public void handleHttpResponse(Net.HttpResponse httpResponse) {
-                if (httpResponse.getStatus().getStatusCode() == 200) {
-                    String getResponse = httpResponse.getResultAsString();
-
-                    JsonValue jsonArray = new JsonReader().parse(getResponse);
-
-                    if (jsonArray.size > 0) {
-                        bestRound = jsonArray.get(0).getInt("highest_round");
-                        System.out.println("highest score :" + bestRound);
-
-                        if (bestRound < finalRound) {
-                            Net.HttpRequest patchScore = new Net.HttpRequest(Net.HttpMethods.PATCH);
-                            patchScore.setUrl(game.Supabase_url + "/rest/v1/high_scores?user_id=eq." + game.getUserId());
-
-                            patchScore.setHeader("apikey", MainGame.Api_key);
-                            patchScore.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
-                            patchScore.setHeader("Content-Type", "application/json");
-                            patchScore.setHeader("Prefer", "return=minimal");
-
-                            String payload = "{\"user_id\": \"" + game.getUserId() + "\", \"highest_round\": " + finalRound + "}";
-                            patchScore.setContent(payload);
-
-                            Gdx.net.sendHttpRequest(patchScore, new Net.HttpResponseListener() {
-                                @Override
-                                public void handleHttpResponse(Net.HttpResponse httpResponse) {
-                                    if (httpResponse.getStatus().getStatusCode() < 300 && httpResponse.getStatus().getStatusCode() >= 200) {
-                                        System.out.println("round successfully stored");
-                                    } else {
-                                        System.out.println("error : round couldnt be stored");
-                                    }
-                                }
-
-                                @Override
-                                public void failed(Throwable throwable) {
-
-                                }
-
-                                @Override
-                                public void cancelled() {
-
-                                }
-                            });
-                        } else {
-                            System.out.println("highest round is above this round : it will not be stored");
-                            return;
-                        }
-                    } else {
-                        System.out.println("no round found");
-
-                        Net.HttpRequest scoreRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-                        scoreRequest.setUrl(game.Supabase_url + "/rest/v1/high_scores");
-
-                        scoreRequest.setHeader("apikey", MainGame.Api_key);
-                        scoreRequest.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
-                        scoreRequest.setHeader("Content-Type", "application/json");
-                        scoreRequest.setHeader("Prefer", "return=minimal");
-
-                        String payload = "{\"user_id\": \"" + game.getUserId() + "\", \"highest_round\": " + finalRound + "}";
-                        scoreRequest.setContent(payload);
-
-                        Gdx.net.sendHttpRequest(scoreRequest, new Net.HttpResponseListener() {
-                            @Override
-                            public void handleHttpResponse(Net.HttpResponse httpResponse) {
-                                if (httpResponse.getStatus().getStatusCode() == 201) {
-                                    System.out.println("round" + finalRound + "successfully stored");
-                                } else {
-                                    System.out.println("error, cannot save the round" + httpResponse.getResultAsString());
-                                }
-                            }
-
-                            @Override
-                            public void failed(Throwable throwable) {
-
-                            }
-
-                            @Override
-                            public void cancelled() {
-
-                            }
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void failed(Throwable throwable) {
-
-            }
-
-            @Override
-            public void cancelled() {
-
-            }
-        });
+    public int getFinalRound() {
+        return finalRound;
     }
 
     @Override
