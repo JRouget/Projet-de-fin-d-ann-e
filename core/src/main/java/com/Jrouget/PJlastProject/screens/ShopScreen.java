@@ -1,5 +1,8 @@
-package com.Jrouget.PJlastProject;
+package com.Jrouget.PJlastProject.screens;
 
+import com.Jrouget.PJlastProject.game.GameMechanic;
+import com.Jrouget.PJlastProject.game.ShopItems;
+import com.Jrouget.PJlastProject.game.SideMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;

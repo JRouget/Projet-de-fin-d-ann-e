@@ -1,6 +1,4 @@
-package com.Jrouget.PJlastProject;
-
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+package com.Jrouget.PJlastProject.game;
 
 public enum ShopItems {
 

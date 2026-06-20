@@ -1,8 +1,9 @@
-package com.Jrouget.PJlastProject;
+package com.Jrouget.PJlastProject.game;
 
-import com.badlogic.gdx.Game;
+import com.Jrouget.PJlastProject.screens.GameOverScreen;
+import com.Jrouget.PJlastProject.MainGame;
+import com.Jrouget.PJlastProject.screens.ShopScreen;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -10,8 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-
-import java.io.PrintStream;
 
 public class MachineSous extends Group {
 

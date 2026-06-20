@@ -1,4 +1,4 @@
-package com.Jrouget.PJlastProject;
+package com.Jrouget.PJlastProject.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

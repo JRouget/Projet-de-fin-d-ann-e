@@ -1,5 +1,9 @@
-package com.Jrouget.PJlastProject;
+package com.Jrouget.PJlastProject.screens;
 
+import com.Jrouget.PJlastProject.game.CombosAffichage;
+import com.Jrouget.PJlastProject.game.GameMechanic;
+import com.Jrouget.PJlastProject.game.MachineSous;
+import com.Jrouget.PJlastProject.game.SideMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;

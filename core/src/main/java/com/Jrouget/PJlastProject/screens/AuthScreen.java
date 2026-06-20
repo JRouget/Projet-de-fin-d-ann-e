@@ -1,7 +1,8 @@
-package com.Jrouget.PJlastProject;
+package com.Jrouget.PJlastProject.screens;
 
+import com.Jrouget.PJlastProject.MainGame;
+import com.Jrouget.PJlastProject.network.SupabaseServices;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,11 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisTextField;
+import com.Jrouget.PJlastProject.network.SupabaseServices;
 
 public class AuthScreen implements Screen {
 

@@ -1,7 +1,8 @@
-package com.Jrouget.PJlastProject;
+package com.Jrouget.PJlastProject.screens;
 
+import com.Jrouget.PJlastProject.MainGame;
+import com.Jrouget.PJlastProject.network.SupabaseServices;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;

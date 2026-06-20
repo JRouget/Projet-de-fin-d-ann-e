@@ -1,5 +1,7 @@
-package com.Jrouget.PJlastProject;
+package com.Jrouget.PJlastProject.screens;
 
+import com.Jrouget.PJlastProject.MainGame;
+import com.Jrouget.PJlastProject.network.SupabaseServices;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -11,35 +13,40 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.kotcrab.vis.ui.VisUI;
 
-public class FirstScreen implements Screen {
+public class GameOverScreen implements Screen {
     private MainGame game;
+    private SupabaseServices supabaseServices;
 
-    private Texture textureBouton;
-    private Texture textureBoutonClicked;
-    private Texture backgroundTexture;
     private Stage stage;
+    private Texture backgroundTexture;
+    private Texture textureButtonReplay;
+    private Texture textureButtonReplayClicked;
 
-    public FirstScreen(MainGame game) {
+    private int finalRound;
+    private int bestRound;
+    private String username;
 
+    public GameOverScreen(MainGame game, int finalRound) {
         this.game = game;
+        this.supabaseServices = new SupabaseServices(this.game);
+        this.finalRound = finalRound;
     }
 
     @Override
     public void show() {
-        if (!VisUI.isLoaded()) {
-            VisUI.load();
-        }
-
-        stage = new com.badlogic.gdx.scenes.scene2d.Stage(new FitViewport(480,  270));
+        stage = new Stage(new FitViewport(480, 270));
 
         creerFond();
         creerInterface();
+
+        supabaseServices.getBestRound(finalRound);
+
+        Gdx.input.setInputProcessor(stage);
     }
 
-    private void creerFond(){
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundFirstScreen.png"));
+    private void creerFond() {
+        backgroundTexture = new Texture(Gdx.files.internal("backgroundGameOver.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }
@@ -49,27 +56,29 @@ public class FirstScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        textureBouton = new Texture(Gdx.files.internal("bouton.png"));
-        textureBoutonClicked = new Texture(Gdx.files.internal("boutonClicked.png"));
+        textureButtonReplay = new Texture(Gdx.files.internal("boutonRejouer.png"));
+        textureButtonReplayClicked = new Texture(Gdx.files.internal("boutonRejouerClicked.png"));
 
-        TextureRegionDrawable dessinBouton = new TextureRegionDrawable(textureBouton);
-        TextureRegionDrawable dessinBoutonClicked = new TextureRegionDrawable(textureBoutonClicked);
+        TextureRegionDrawable dessinButtonReplay = new TextureRegionDrawable(textureButtonReplay);
+        TextureRegionDrawable dessinButtonReplayClicked = new TextureRegionDrawable(textureButtonReplayClicked);
 
-        ImageButton boutonDemarrer = new ImageButton(dessinBouton, dessinBoutonClicked);
+        ImageButton buttonReplay = new ImageButton(dessinButtonReplay, dessinButtonReplayClicked);
 
-        table.setPosition(0,-40);
+        table.setPosition(0, -40);
 
-        boutonDemarrer.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ChangeListener() {
+        buttonReplay.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                System.out.println("Game starting..");
-                game.setScreen(new GameScreen());
+                game.setScreen(new FirstScreen(game));
             }
         });
-        table.add(boutonDemarrer);
 
-        Gdx.input.setInputProcessor(stage);
+        table.add(buttonReplay);
 
+    }
+
+    public int getFinalRound() {
+        return finalRound;
     }
 
     @Override
@@ -105,8 +114,6 @@ public class FirstScreen implements Screen {
 
     @Override
     public void dispose() {
-        stage.dispose();
-        textureBouton.dispose();
-        backgroundTexture.dispose();
+
     }
 }

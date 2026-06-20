@@ -1,5 +1,8 @@
-package com.Jrouget.PJlastProject;
+package com.Jrouget.PJlastProject.network;
 
+import com.Jrouget.PJlastProject.MainGame;
+import com.Jrouget.PJlastProject.screens.FirstScreen;
+import com.Jrouget.PJlastProject.screens.UsernameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.utils.JsonReader;
@@ -13,7 +16,7 @@ public class SupabaseServices {
         this.game = game;
     }
 
-    void supabaseLogin(String email, String password) {
+    public void supabaseLogin(String email, String password) {
         Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
         request.setUrl(MainGame.Supabase_url + "/auth/v1/token?grant_type=password");
         request.setHeader("apikey", MainGame.Api_key);
@@ -187,7 +190,7 @@ public class SupabaseServices {
                                 }
                             });
                         } else {
-                            System.out.println("highest round is above this round : it will not be stored");
+                            System.out.println("highest round is above or equal to this round : it will not be stored");
                             return;
                         }
                     } else {

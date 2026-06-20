@@ -1,5 +1,7 @@
 package com.Jrouget.PJlastProject;
 
+import com.Jrouget.PJlastProject.network.SupabaseServices;
+import com.Jrouget.PJlastProject.screens.AuthScreen;
 import com.badlogic.gdx.Game;
 
 public class MainGame extends Game {

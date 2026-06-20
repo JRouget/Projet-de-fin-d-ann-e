@@ -1,4 +1,6 @@
-package com.Jrouget.PJlastProject;
+package com.Jrouget.PJlastProject.game;
+
+import com.Jrouget.PJlastProject.screens.ShopScreen;
 
 import java.util.Random;
 
