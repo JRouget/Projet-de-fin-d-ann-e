@@ -155,7 +155,7 @@ public class SupabaseServices {
                         System.out.println("highest score :" + bestRound);
 
                         if (bestRound < finalRound) {
-                            Net.HttpRequest patchScore = new Net.HttpRequest(Net.HttpMethods.PATCH);
+                            Net.HttpRequest patchScore = new Net.HttpRequest(Net.HttpMethods.PUT);
                             patchScore.setUrl(game.Supabase_url + "/rest/v1/high_scores?user_id=eq." + game.getUserId());
 
                             patchScore.setHeader("apikey", MainGame.Api_key);
@@ -172,13 +172,13 @@ public class SupabaseServices {
                                     if (httpResponse.getStatus().getStatusCode() < 300 && httpResponse.getStatus().getStatusCode() >= 200) {
                                         System.out.println("round successfully stored");
                                     } else {
-                                        System.out.println("error : round couldnt be stored");
+                                        System.out.println("error : round couldnt be stored" + httpResponse.getResultAsString());
                                     }
                                 }
 
                                 @Override
                                 public void failed(Throwable throwable) {
-
+                                    System.out.println("error :" + throwable.getMessage());
                                 }
 
                                 @Override
@@ -217,7 +217,7 @@ public class SupabaseServices {
 
                             @Override
                             public void failed(Throwable throwable) {
-
+                                System.out.println("error :" + throwable.getMessage());
                             }
 
                             @Override
