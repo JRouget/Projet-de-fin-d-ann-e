@@ -12,6 +12,7 @@ Go to the **Releases** tab on GitHub and download the version that corresponds t
 - **Mac**: Download the `.dmg` file and open it.
 - **Universal**: Download the `.jar` file and double-click on it (requires Java to be installed on your machine).
 
+(The releases seems to be broken, use the .jar for now if you don't want to lose your time)
 ---
 
 ## How to play? (The game)
