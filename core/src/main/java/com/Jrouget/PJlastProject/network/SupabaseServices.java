@@ -6,6 +6,7 @@ import com.Jrouget.PJlastProject.screens.FirstScreen;
 import com.Jrouget.PJlastProject.screens.UsernameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
@@ -17,7 +18,6 @@ public class SupabaseServices {
     private String rawError;
 
     public SupabaseServices(MainGame game) {
-
         this.game = game;
     }
 
@@ -167,6 +167,39 @@ public class SupabaseServices {
         });
     }
 
+    public void fetchHighScore(final Label scoreLabel) {
+        if (game.getUserJwtToken() == null) return;
+
+        Net.HttpRequest getRequest = new Net.HttpRequest(Net.HttpMethods.GET);
+        getRequest.setUrl(MainGame.Supabase_url + "/rest/v1/high_scores?select=highest_round&user_id=eq." + game.getUserId());
+        getRequest.setHeader("apikey", MainGame.Api_key);
+        getRequest.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
+        getRequest.setHeader("Accept", "application/json");
+
+        Gdx.net.sendHttpRequest(getRequest, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                if (httpResponse.getStatus().getStatusCode() == 200) {
+                    JsonValue jsonArray = new JsonReader().parse(httpResponse.getResultAsString());
+                    if (jsonArray.size > 0) {
+                        int bestRound = jsonArray.get(0).getInt("highest_round");
+                        game.setHighScore(bestRound);
+
+                        Gdx.app.postRunnable(() -> {
+                            scoreLabel.setText("High Score: " + bestRound);
+                        });
+                    }
+                }
+            }
+            @Override
+            public void failed(Throwable throwable) {
+                System.out.println("error : " + throwable.getMessage());
+            }
+            @Override
+            public void cancelled() { }
+        });
+    }
+
     public void getBestRound(int finalRound) {
         if (game.getUserJwtToken() == null) {
             System.out.println("user not connected -> no score stored");
@@ -282,7 +315,6 @@ public class SupabaseServices {
                     }
                 }
             }
-
 
 
             @Override

@@ -14,6 +14,8 @@ public class MainGame extends Game {
     private String userJwtToken = null;
     private String userId = null;
 
+    private int highScore = 0;
+
     private String username = "";
 
     public MainGame() {
@@ -24,6 +26,8 @@ public class MainGame extends Game {
         this.userJwtToken = token;
         this.userId = id;
     }
+
+    public void setHighScore(int score) { this.highScore = score; }
 
     public void setUsername(String username) {
         this.username = username;
@@ -40,6 +44,8 @@ public class MainGame extends Game {
     public String getUsername() {
         return username;
     }
+
+    public int getHighScore() { return highScore; }
 
     @Override
     public void create() {
