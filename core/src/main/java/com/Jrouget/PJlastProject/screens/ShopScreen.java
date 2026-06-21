@@ -237,7 +237,7 @@ public class ShopScreen  extends Group {
             }
         });
 
-        // SLOT 2
+
         imageSlot2.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
@@ -256,7 +256,7 @@ public class ShopScreen  extends Group {
             }
         });
 
-        // SLOT 3
+
         imageSlot3.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {

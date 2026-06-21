@@ -23,6 +23,7 @@ public class SideMenu extends Group {
     public SideMenu(GameMechanic gameMechanic) {
 
         this.setSize(300, 200);
+        this.setTouchable(com.badlogic.gdx.scenes.scene2d.Touchable.childrenOnly);
 
         textureSideMenu = new Texture(Gdx.files.internal("ui/Bandeau.png"));
         TextureRegionDrawable dessinSideMenu = new TextureRegionDrawable(textureSideMenu);

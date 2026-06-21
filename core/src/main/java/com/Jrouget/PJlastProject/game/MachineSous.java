@@ -24,6 +24,8 @@ public class MachineSous extends Group {
     private Image roll1;
     private Image roll2;
     private Image roll3;
+    
+    private ImageButton boutonLevier;
 
     private SideMenu sideMenu;
 
@@ -35,23 +37,23 @@ public class MachineSous extends Group {
 
         this.shopScreen = shopScreen;
 
-        //Assets of the GB
+
         leverTexture = new Texture(Gdx.files.internal("ui/levier.png"));
         machineTexture = new Texture(Gdx.files.internal("ui/gamblingMachine.png"));
-        //Assets of the symbols
+
         orange = new Texture(Gdx.files.internal("items/orange.png"));
         apple = new Texture(Gdx.files.internal("items/apple.png"));
         seven = new Texture(Gdx.files.internal("items/Seven.png"));
 
-        //TexturesDraw of the GB
+
         TextureRegionDrawable leverDraw = new TextureRegionDrawable(leverTexture);
         TextureRegionDrawable dessinMachine = new TextureRegionDrawable(machineTexture);
 
-        //Image of the GB (button and body of the machine)
-        ImageButton boutonLevier = new ImageButton(leverDraw);
+
+        boutonLevier = new ImageButton(leverDraw);
         Image machineImage = new Image(dessinMachine);
 
-        //Image of the symbols
+
         roll1 = new Image(orange);
         roll2 = new Image(apple);
         roll3 = new Image(seven);
@@ -111,6 +113,18 @@ public class MachineSous extends Group {
         if (number == 1) return apple;
         else if (number == 2) return orange;
         else return seven;
+    }
+
+    @Override
+    public Actor hit(float x, float y, boolean touchable) {
+
+        com.badlogic.gdx.math.Vector2 local = new com.badlogic.gdx.math.Vector2(x, y);
+        boutonLevier.parentToLocalCoordinates(local);
+        Actor hitLever = boutonLevier.hit(local.x, local.y, touchable);
+        if (hitLever != null) return hitLever;
+        
+
+        return super.hit(x, y, touchable);
     }
 
     public void dispose() {
