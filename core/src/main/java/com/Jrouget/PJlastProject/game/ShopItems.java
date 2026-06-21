@@ -2,12 +2,12 @@ package com.Jrouget.PJlastProject.game;
 
 public enum ShopItems {
 
-    PEPIN_FERTILE("Pépins Fertiles", "+15 chances de Pomme", 20, "APPLE", 15, "silverApple.png"),
-    SUPER_VERGER("Super Verger", "+30 chances de Pomme", 35, "APPLE", 30, "goldApple.png"),
-    ZESTE_CHANCEUX("Zeste Chanceux", "+10 chances d'Orange", 40, "ORANGE", 10, "goldOrange.png"),
-    TREFLE_DORE("Trèfle Doré", "+5 chances de Seven", 60, "SEVEN", 5, "goldSeven.png"),
-    DE_DIVIN("Dé Divin", "+8 chances de Seven", 90, "SEVEN", 8, "divineSeven.png"),
-    TIRAGE("Tirage", "+5 Tirage", 100, "TIRAGE", 5, "ticket.png");
+    PEPIN_FERTILE("Pépins Fertiles", "+15 chances de Pomme", 20, "APPLE", 15, "items/silverApple.png"),
+    SUPER_VERGER("Super Verger", "+30 chances de Pomme", 35, "APPLE", 30, "items/goldApple.png"),
+    ZESTE_CHANCEUX("Zeste Chanceux", "+10 chances d'Orange", 40, "ORANGE", 10, "items/goldOrange.png"),
+    TREFLE_DORE("Trèfle Doré", "+5 chances de Seven", 60, "SEVEN", 5, "items/goldSeven.png"),
+    DE_DIVIN("Dé Divin", "+8 chances de Seven", 90, "SEVEN", 8, "items/divineSeven.png"),
+    TIRAGE("Tirage", "+5 Tirage", 100, "TIRAGE", 5, "items/ticket.png");
 
     private final String name;
     private final String description;

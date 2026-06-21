@@ -9,9 +9,9 @@ public class combosDisplay extends Group {
 
     public combosDisplay() {
 
-        Texture textureTripleApple = new Texture(Gdx.files.internal("tripleApple.png"));
-        Texture textureTripleOrange = new Texture(Gdx.files.internal("tripleOrange.png"));
-        Texture textureTripleSeven = new Texture(Gdx.files.internal("tripleSeven.png"));
+        Texture textureTripleApple = new Texture(Gdx.files.internal("items/tripleApple.png"));
+        Texture textureTripleOrange = new Texture(Gdx.files.internal("items/tripleOrange.png"));
+        Texture textureTripleSeven = new Texture(Gdx.files.internal("items/tripleSeven.png"));
 
         Image tripleApple = new Image(textureTripleApple);
         Image tripleOrange = new Image(textureTripleOrange);

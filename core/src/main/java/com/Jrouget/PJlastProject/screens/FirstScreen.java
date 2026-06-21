@@ -54,7 +54,7 @@ public class FirstScreen implements Screen {
     }
 
     private void makeBackground(){
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundFirstScreen.png"));
+        backgroundTexture = new Texture(Gdx.files.internal("backgrounds/backgroundFirstScreen.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }
@@ -70,10 +70,10 @@ public class FirstScreen implements Screen {
 
         table.add(scoreLabel).padBottom(20).row();
 
-        textureButton = new Texture(Gdx.files.internal("bouton.png"));
-        textureButtonClicked = new Texture(Gdx.files.internal("boutonClicked.png"));
-        textureLeaderboardButton = new Texture(Gdx.files.internal("leaderboardButton.png"));
-        textureLeaderboardButtonClicked = new Texture(Gdx.files.internal("leaderboardButtonClicked.png"));
+        textureButton = new Texture(Gdx.files.internal("buttons/bouton.png"));
+        textureButtonClicked = new Texture(Gdx.files.internal("buttons/boutonClicked.png"));
+        textureLeaderboardButton = new Texture(Gdx.files.internal("buttons/leaderboardButton.png"));
+        textureLeaderboardButtonClicked = new Texture(Gdx.files.internal("buttons/leaderboardButtonClicked.png"));
 
         TextureRegionDrawable playButtonDraw = new TextureRegionDrawable(textureButton);
         TextureRegionDrawable playButtonClickedDraw = new TextureRegionDrawable(textureButtonClicked);
@@ -111,7 +111,7 @@ public class FirstScreen implements Screen {
     }
 
     private void makeLeaderboard() {
-        leaderboardBackgroundTexture = new Texture(Gdx.files.internal("leaderboardBackground.png"));
+        leaderboardBackgroundTexture = new Texture(Gdx.files.internal("backgrounds/leaderboardBackground.png"));
         Image background = new Image(leaderboardBackgroundTexture);
         background.setPosition((480 - background.getWidth()) / 2, (270 - background.getHeight()) / 2);
 
@@ -125,8 +125,8 @@ public class FirstScreen implements Screen {
         scoresTable.setPosition(background.getX(), background.getY());
         leaderPopUp.addActor(scoresTable);
 
-        textureExitButton = new Texture(Gdx.files.internal("exitButton.png"));
-        textureExitButtonClicked = new Texture(Gdx.files.internal("exitButtonClicked.png"));
+        textureExitButton = new Texture(Gdx.files.internal("buttons/exitButton.png"));
+        textureExitButtonClicked = new Texture(Gdx.files.internal("buttons/exitButtonClicked.png"));
 
         TextureRegionDrawable drawExitButton = new TextureRegionDrawable(textureExitButton);
         TextureRegionDrawable drawExitButtonClicked = new TextureRegionDrawable(textureExitButtonClicked);

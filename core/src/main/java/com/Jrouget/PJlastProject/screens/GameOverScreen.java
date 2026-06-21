@@ -49,7 +49,7 @@ public class GameOverScreen implements Screen {
     }
 
     private void makeBackground() {
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundGameOver.png"));
+        backgroundTexture = new Texture(Gdx.files.internal("backgrounds/backgroundGameOver.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }
@@ -59,8 +59,8 @@ public class GameOverScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        textureButtonReplay = new Texture(Gdx.files.internal("boutonRejouer.png"));
-        textureButtonReplayClicked = new Texture(Gdx.files.internal("boutonRejouerClicked.png"));
+        textureButtonReplay = new Texture(Gdx.files.internal("buttons/boutonRejouer.png"));
+        textureButtonReplayClicked = new Texture(Gdx.files.internal("buttons/boutonRejouerClicked.png"));
 
         TextureRegionDrawable buttonReplayDraw = new TextureRegionDrawable(textureButtonReplay);
         TextureRegionDrawable buttonReplayClickedDraw = new TextureRegionDrawable(textureButtonReplayClicked);

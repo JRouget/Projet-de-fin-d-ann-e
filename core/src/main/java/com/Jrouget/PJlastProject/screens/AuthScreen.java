@@ -49,7 +49,7 @@ public class AuthScreen implements Screen {
     }
 
     private void makeBackground(){
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundFirstScreen.png"));
+        backgroundTexture = new Texture(Gdx.files.internal("backgrounds/backgroundFirstScreen.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }
@@ -59,10 +59,10 @@ public class AuthScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        loginButtonTexture = new Texture(Gdx.files.internal("loginButton.png"));
-        LoginButtonTextureClicked = new Texture(Gdx.files.internal("loginButtonClicked.png"));
-        guestButtonTexture = new Texture(Gdx.files.internal("guestButton.png"));
-        guestButtonClickedTexture = new Texture(Gdx.files.internal("guestButtonClicked.png"));
+        loginButtonTexture = new Texture(Gdx.files.internal("buttons/loginButton.png"));
+        LoginButtonTextureClicked = new Texture(Gdx.files.internal("buttons/loginButtonClicked.png"));
+        guestButtonTexture = new Texture(Gdx.files.internal("buttons/guestButton.png"));
+        guestButtonClickedTexture = new Texture(Gdx.files.internal("buttons/guestButtonClicked.png"));
 
         TextureRegionDrawable loginButtonDraw = new TextureRegionDrawable(loginButtonTexture);
         TextureRegionDrawable loginButtonClickedDraw = new TextureRegionDrawable(LoginButtonTextureClicked);

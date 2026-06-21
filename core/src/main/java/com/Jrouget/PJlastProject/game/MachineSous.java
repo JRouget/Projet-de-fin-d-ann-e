@@ -36,12 +36,12 @@ public class MachineSous extends Group {
         this.shopScreen = shopScreen;
 
         //Assets of the GB
-        leverTexture = new Texture(Gdx.files.internal("levier.png"));
-        machineTexture = new Texture(Gdx.files.internal("gamblingMachine.png"));
+        leverTexture = new Texture(Gdx.files.internal("ui/levier.png"));
+        machineTexture = new Texture(Gdx.files.internal("ui/gamblingMachine.png"));
         //Assets of the symbols
-        orange = new Texture(Gdx.files.internal("orange.png"));
-        apple = new Texture(Gdx.files.internal("apple.png"));
-        seven = new Texture(Gdx.files.internal("Seven.png"));
+        orange = new Texture(Gdx.files.internal("items/orange.png"));
+        apple = new Texture(Gdx.files.internal("items/apple.png"));
+        seven = new Texture(Gdx.files.internal("items/Seven.png"));
 
         //TexturesDraw of the GB
         TextureRegionDrawable leverDraw = new TextureRegionDrawable(leverTexture);

@@ -24,7 +24,7 @@ public class SideMenu extends Group {
 
         this.setSize(300, 200);
 
-        textureSideMenu = new Texture(Gdx.files.internal("Bandeau.png"));
+        textureSideMenu = new Texture(Gdx.files.internal("ui/Bandeau.png"));
         TextureRegionDrawable dessinSideMenu = new TextureRegionDrawable(textureSideMenu);
         Image imageSideMenu = new Image(dessinSideMenu);
 

@@ -44,7 +44,7 @@ public class ErrorScreen implements Screen {
     }
 
     private void makeBackground() {
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundTapis1.png"));
+        backgroundTexture = new Texture(Gdx.files.internal("backgrounds/backgroundTapis1.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }
@@ -54,8 +54,8 @@ public class ErrorScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        submitButtonTexture = new Texture(Gdx.files.internal("submitButton.png"));
-        submitButtonClickedTexture = new Texture(Gdx.files.internal("submitButtonClicked.png"));
+        submitButtonTexture = new Texture(Gdx.files.internal("buttons/submitButton.png"));
+        submitButtonClickedTexture = new Texture(Gdx.files.internal("buttons/submitButtonClicked.png"));
 
         TextureRegionDrawable submitButtonDraw = new TextureRegionDrawable(submitButtonTexture);
         TextureRegionDrawable submitButtonClickedDraw = new TextureRegionDrawable(submitButtonClickedTexture);

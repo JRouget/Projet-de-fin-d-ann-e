@@ -36,7 +36,7 @@ public class GameScreen implements Screen {
     }
 
     private void makeBackground() {
-        backgroundTexture = new Texture(Gdx.files.internal("backgroundTapis1.png"));
+        backgroundTexture = new Texture(Gdx.files.internal("backgrounds/backgroundTapis1.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }

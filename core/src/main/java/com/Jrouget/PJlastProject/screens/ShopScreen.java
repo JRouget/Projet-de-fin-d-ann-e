@@ -56,10 +56,10 @@ public class ShopScreen  extends Group {
 
         this.setSize(300,200);
 
-        shopBackground = new Texture(Gdx.files.internal("shopFond.png"));
-        textureExitButton = new Texture(Gdx.files.internal("exitButton.png"));
-        textureExitButtonClicked = new Texture(Gdx.files.internal("exitButtonClicked.png"));
-        textureBuyButton = new Texture(Gdx.files.internal("buyButton.png"));
+        shopBackground = new Texture(Gdx.files.internal("backgrounds/shopFond.png"));
+        textureExitButton = new Texture(Gdx.files.internal("buttons/exitButton.png"));
+        textureExitButtonClicked = new Texture(Gdx.files.internal("buttons/exitButtonClicked.png"));
+        textureBuyButton = new Texture(Gdx.files.internal("buttons/buyButton.png"));
 
         Image background = new Image(shopBackground);
 
@@ -181,7 +181,7 @@ public class ShopScreen  extends Group {
     public void createShopItems() {
 
         infoPopup = new Group();
-        backgroundInfoPopup = new Texture(Gdx.files.internal("infoPopup.png"));
+        backgroundInfoPopup = new Texture(Gdx.files.internal("ui/infoPopup.png"));
         Image infoPopupImage = new Image(backgroundInfoPopup);
 
         infoName = new Label("", style);
