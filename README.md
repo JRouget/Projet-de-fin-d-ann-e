@@ -31,7 +31,7 @@ If you are :
 
 - **`Laurent`** : use **laurent@test.fr** and 1234 to connect.
 
-And if you are somebody else I didn't think about, I'm sorry you can open a Ticket on Jira and use "Se connecter comme invité for now".
+And if you are somebody else I didn't think about, I'm sorry you can open a Ticket on Jira and use "Se connecter comme invité" for now.
 
 ![FirstScreen](./assets/readMe/2.png)
 
