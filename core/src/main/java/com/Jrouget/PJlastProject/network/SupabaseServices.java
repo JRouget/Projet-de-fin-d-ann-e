@@ -14,6 +14,7 @@ public class SupabaseServices {
     private final MainGame game;
 
     public static String error;
+    private String rawError;
 
     public SupabaseServices(MainGame game) {
 
@@ -52,9 +53,16 @@ public class SupabaseServices {
             @Override
             public void failed(Throwable throwable) {
                 System.out.println("Connexion failed" + throwable.getMessage());
-                error = throwable.getMessage();
+                String rawError = throwable.getMessage();
 
-                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
+                if (rawError != null && (rawError.contains("supabase.co") || rawError.contains("UnknownHost"))) {
+                    error = "Unable to connect to servers.\nPlease check your internet connection.";
+                } else if (rawError != null && rawError.contains("timeout")) {
+                    error = "The server is taking too long to respond.\nPlease try again later.";
+                } else {
+                    error = "A network error occurred during connection.";
+                }
+                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen(game)));
             }
 
             @Override
@@ -95,8 +103,16 @@ public class SupabaseServices {
             @Override
             public void failed(Throwable throwable) {
                 System.out.println("error : " + throwable.getMessage());
-                error = throwable.getMessage();
-                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
+                rawError = throwable.getMessage();
+
+                if (rawError != null && (rawError.contains("supabase.co") || rawError.contains("UnknownHost"))) {
+                    error = "Connection lost during profile verification.\nPlease check your internet connection.";
+                } else if (rawError != null && rawError.contains("timeout")) {
+                    error = "The server is taking too long to respond.\nPlease try again later.";
+                } else {
+                    error = "Unable to verify your profile.";
+                }
+                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen(game)));
             }
 
             @Override
@@ -132,8 +148,16 @@ public class SupabaseServices {
             @Override
             public void failed(Throwable throwable) {
                 System.out.println("error" + throwable.getMessage());
-                error = throwable.getMessage();
-                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
+                rawError = throwable.getMessage();
+
+                if (rawError != null && (rawError.contains("supabase.co") || rawError.contains("UnknownHost"))) {
+                    error = "Unable to save the username.\nPlease check your internet connection.";
+                } else if (rawError != null && rawError.contains("timeout")) {
+                    error = "The server is taking too long to respond.\nPlease try again later.";
+                } else {
+                    error = "An unexpected error prevented profile creation.";
+                }
+                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen(game)));
             }
 
             @Override
@@ -193,8 +217,14 @@ public class SupabaseServices {
                                 @Override
                                 public void failed(Throwable throwable) {
                                     System.out.println("error :" + throwable.getMessage());
-                                    error = throwable.getMessage();
-                                    Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
+                                    rawError = throwable.getMessage();
+
+                                    if (rawError != null && (rawError.contains("supabase.co") || rawError.contains("UnknownHost"))) {
+                                        error = "Unable to update high score.\nPlease check your internet connection.";
+                                    } else {
+                                        error = "Unable to update high score.";
+                                    }
+                                    Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen(game)));
                                 }
 
                                 @Override
@@ -234,8 +264,14 @@ public class SupabaseServices {
                             @Override
                             public void failed(Throwable throwable) {
                                 System.out.println("error :" + throwable.getMessage());
-                                error = throwable.getMessage();
-                                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
+                                rawError = throwable.getMessage();
+
+                                if (rawError != null && (rawError.contains("supabase.co") || rawError.contains("UnknownHost"))) {
+                                    error = "Unable to save your score.\nPlease check your internet connection.";
+                                } else {
+                                    error = "Unable to save your first score.";
+                                }
+                                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen(game)));
                             }
 
                             @Override
@@ -252,8 +288,16 @@ public class SupabaseServices {
             @Override
             public void failed(Throwable throwable) {
                 System.out.println("error :" + throwable.getMessage());
-                error = throwable.getMessage();
-                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
+                rawError = throwable.getMessage();
+
+                if (rawError != null && (rawError.contains("supabase.co") || rawError.contains("UnknownHost"))) {
+                    error = "Unable to retrieve your previous score.\nPlease check your internet connection.";
+                } else if (rawError != null && rawError.contains("timeout")) {
+                    error = "The server is taking too long to respond.\nPlease try again later.";
+                } else {
+                    error = "An error occurred while retrieving the score.";
+                }
+                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen(game)));
             }
 
             @Override

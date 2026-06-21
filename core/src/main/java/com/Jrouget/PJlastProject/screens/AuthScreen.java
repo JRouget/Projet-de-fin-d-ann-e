@@ -19,7 +19,6 @@ import com.kotcrab.vis.ui.widget.VisTextField;
 public class AuthScreen implements Screen {
 
     private final MainGame game;
-    private final SupabaseServices supabaseServices;
 
     private Stage stage;
     private VisTextField emailField;
@@ -33,9 +32,8 @@ public class AuthScreen implements Screen {
 
     private String ApiResponse;
 
-    public AuthScreen(MainGame game, SupabaseServices supabaseServices) {
+    public AuthScreen(MainGame game) {
         this.game = game;
-        this.supabaseServices = new SupabaseServices(this.game);
     }
 
     @Override
@@ -99,7 +97,7 @@ public class AuthScreen implements Screen {
         loginButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                supabaseServices.supabaseLogin(emailField.getText(), passwordField.getText());
+                game.supabaseServices.supabaseLogin(emailField.getText(), passwordField.getText());
             }
         });
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.Game;
 
 public class MainGame extends Game {
 
-    private SupabaseServices supabaseServices;
+    public SupabaseServices supabaseServices;
 
     public static final String Supabase_url = "https://vdsaqslmpazwlszbjnhj.supabase.co";
     public static final String Api_key = "sb_publishable_q_pE5dmNZnGKnTh6pU_LHg_CUSzBtaL";
@@ -44,6 +44,6 @@ public class MainGame extends Game {
     @Override
     public void create() {
         this.supabaseServices = new SupabaseServices(this);
-        setScreen(new AuthScreen(this, supabaseServices));
+        setScreen(new AuthScreen(this));
     }
 }
