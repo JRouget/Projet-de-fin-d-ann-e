@@ -200,6 +200,39 @@ public class SupabaseServices {
         });
     }
 
+    public void fetchLeaderboard(final com.badlogic.gdx.scenes.scene2d.ui.Table leaderboardTable) {
+        com.badlogic.gdx.Net.HttpRequest getRequest = new com.badlogic.gdx.Net.HttpRequest(com.badlogic.gdx.Net.HttpMethods.GET);
+        getRequest.setUrl(MainGame.Supabase_url + "/rest/v1/high_scores?select=username,highest_round&order=highest_round.desc&limit=5");
+        getRequest.setHeader("apikey", MainGame.Api_key);
+
+        if (game.getUserJwtToken() != null) {
+            getRequest.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
+        }
+        getRequest.setHeader("Accept", "application/json");
+
+        Gdx.net.sendHttpRequest(getRequest, new com.badlogic.gdx.Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(com.badlogic.gdx.Net.HttpResponse httpResponse) {
+                if (httpResponse.getStatus().getStatusCode() == 200) {
+                    com.badlogic.gdx.utils.JsonValue jsonArray = new com.badlogic.gdx.utils.JsonReader().parse(httpResponse.getResultAsString());
+
+                    Gdx.app.postRunnable(() -> {
+                        leaderboardTable.clearChildren();
+                        leaderboardTable.add(new com.badlogic.gdx.scenes.scene2d.ui.Label("--- TOP 5 ---", com.kotcrab.vis.ui.VisUI.getSkin())).padBottom(15).row();
+
+                        for (int i = 0; i < jsonArray.size; i++) {
+                            String user = jsonArray.get(i).getString("username");
+                            int score = jsonArray.get(i).getInt("highest_round");
+                            leaderboardTable.add(new com.badlogic.gdx.scenes.scene2d.ui.Label((i+1) + ". " + user + " : " + score, com.kotcrab.vis.ui.VisUI.getSkin())).padBottom(5).row();
+                        }
+                    });
+                }
+            }
+            @Override public void failed(Throwable throwable) { }
+            @Override public void cancelled() { }
+        });
+    }
+
     public void getBestRound(int finalRound) {
         if (game.getUserJwtToken() == null) {
             System.out.println("user not connected -> no score stored");
