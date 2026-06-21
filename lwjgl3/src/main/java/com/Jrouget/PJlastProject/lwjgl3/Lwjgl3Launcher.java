@@ -1,5 +1,6 @@
 package com.Jrouget.PJlastProject.lwjgl3;
 
+import com.Jrouget.PJlastProject.network.SupabaseServices;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.Jrouget.PJlastProject.MainGame;

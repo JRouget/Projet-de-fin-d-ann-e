@@ -1,6 +1,7 @@
 package com.Jrouget.PJlastProject.network;
 
 import com.Jrouget.PJlastProject.MainGame;
+import com.Jrouget.PJlastProject.screens.ErrorScreen;
 import com.Jrouget.PJlastProject.screens.FirstScreen;
 import com.Jrouget.PJlastProject.screens.UsernameScreen;
 import com.badlogic.gdx.Gdx;
@@ -10,9 +11,12 @@ import com.badlogic.gdx.utils.JsonValue;
 
 public class SupabaseServices {
 
-    private MainGame game;
+    private final MainGame game;
+
+    public static String error;
 
     public SupabaseServices(MainGame game) {
+
         this.game = game;
     }
 
@@ -37,7 +41,7 @@ public class SupabaseServices {
 
                     game.setSession(token, id);
 
-                    System.out.println("Connexion successfull");
+                    System.out.println("Connexion successful");
 
                     verifyUsername();
                 } else {
@@ -48,6 +52,9 @@ public class SupabaseServices {
             @Override
             public void failed(Throwable throwable) {
                 System.out.println("Connexion failed" + throwable.getMessage());
+                error = throwable.getMessage();
+
+                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
             }
 
             @Override
@@ -87,7 +94,9 @@ public class SupabaseServices {
 
             @Override
             public void failed(Throwable throwable) {
-
+                System.out.println("error : " + throwable.getMessage());
+                error = throwable.getMessage();
+                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
             }
 
             @Override
@@ -99,7 +108,7 @@ public class SupabaseServices {
 
     public void saveUsername(String username) {
         Net.HttpRequest usernamePost = new Net.HttpRequest(Net.HttpMethods.POST);
-        usernamePost.setUrl(game.Supabase_url + "/rest/v1/profils");
+        usernamePost.setUrl(MainGame.Supabase_url + "/rest/v1/profils");
 
         usernamePost.setHeader("apikey", MainGame.Api_key);
         usernamePost.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
@@ -123,6 +132,8 @@ public class SupabaseServices {
             @Override
             public void failed(Throwable throwable) {
                 System.out.println("error" + throwable.getMessage());
+                error = throwable.getMessage();
+                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
             }
 
             @Override
@@ -139,7 +150,7 @@ public class SupabaseServices {
         }
 
         Net.HttpRequest getRequest = new Net.HttpRequest(Net.HttpMethods.GET);
-        getRequest.setUrl(game.Supabase_url + "/rest/v1/high_scores?select=highest_round&user_id=eq." + game.getUserId());
+        getRequest.setUrl(MainGame.Supabase_url + "/rest/v1/high_scores?select=highest_round&user_id=eq." + game.getUserId());
 
         getRequest.setHeader("apikey", MainGame.Api_key);
         getRequest.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
@@ -159,7 +170,7 @@ public class SupabaseServices {
 
                         if (bestRound < finalRound) {
                             Net.HttpRequest patchScore = new Net.HttpRequest(Net.HttpMethods.PUT);
-                            patchScore.setUrl(game.Supabase_url + "/rest/v1/high_scores?user_id=eq." + game.getUserId());
+                            patchScore.setUrl(MainGame.Supabase_url + "/rest/v1/high_scores?user_id=eq." + game.getUserId());
 
                             patchScore.setHeader("apikey", MainGame.Api_key);
                             patchScore.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
@@ -182,6 +193,8 @@ public class SupabaseServices {
                                 @Override
                                 public void failed(Throwable throwable) {
                                     System.out.println("error :" + throwable.getMessage());
+                                    error = throwable.getMessage();
+                                    Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
                                 }
 
                                 @Override
@@ -197,7 +210,7 @@ public class SupabaseServices {
                         System.out.println("no round found");
 
                         Net.HttpRequest scoreRequest = new Net.HttpRequest(Net.HttpMethods.POST);
-                        scoreRequest.setUrl(game.Supabase_url + "/rest/v1/high_scores");
+                        scoreRequest.setUrl(MainGame.Supabase_url + "/rest/v1/high_scores");
 
                         scoreRequest.setHeader("apikey", MainGame.Api_key);
                         scoreRequest.setHeader("Authorization", "Bearer " + game.getUserJwtToken());
@@ -221,6 +234,8 @@ public class SupabaseServices {
                             @Override
                             public void failed(Throwable throwable) {
                                 System.out.println("error :" + throwable.getMessage());
+                                error = throwable.getMessage();
+                                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
                             }
 
                             @Override
@@ -237,6 +252,8 @@ public class SupabaseServices {
             @Override
             public void failed(Throwable throwable) {
                 System.out.println("error :" + throwable.getMessage());
+                error = throwable.getMessage();
+                Gdx.app.postRunnable(() -> game.setScreen(new ErrorScreen()));
             }
 
             @Override

@@ -1,38 +1,33 @@
 package com.Jrouget.PJlastProject.screens;
 
-import com.Jrouget.PJlastProject.game.combosDisplay;
-import com.Jrouget.PJlastProject.game.GameMechanic;
-import com.Jrouget.PJlastProject.game.MachineSous;
-import com.Jrouget.PJlastProject.game.SideMenu;
+import com.Jrouget.PJlastProject.network.SupabaseServices;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.kotcrab.vis.ui.VisUI;
 
-public class GameScreen implements Screen {
+public class ErrorScreen implements Screen {
 
     private Stage stage;
+
     private Texture backgroundTexture;
-    private MachineSous machineSous;
-    private combosDisplay combosAffichage;
-    private SideMenu sideMenu;
-    private GameMechanic gameMechanic;
+    private Label errorMessage;
 
     @Override
     public void show() {
-        System.out.println("Game started");
-        gameMechanic = new GameMechanic();
-        sideMenu = new SideMenu(gameMechanic);
+        if (!VisUI.isLoaded()) {
+            VisUI.load();
+        }
 
-        stage = new Stage(new FitViewport(480,  270));
+        stage = new com.badlogic.gdx.scenes.scene2d.Stage(new FitViewport(480,  270));
 
         makeBackground();
         makeUi();
-
-        Gdx.input.setInputProcessor(stage);
     }
 
     private void makeBackground() {
@@ -46,21 +41,15 @@ public class GameScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        ShopScreen shopScreen = new ShopScreen(gameMechanic, sideMenu);
+        errorMessage = new Label(SupabaseServices.error, VisUI.getSkin());
 
-        machineSous = new MachineSous(gameMechanic, sideMenu, shopScreen);
-        combosAffichage = new combosDisplay();
+        table.add(errorMessage).pad(20).row();
 
-        table.add(combosAffichage);
-        table.add(machineSous);
-        table.add(sideMenu);
-        stage.addActor(shopScreen);
+        Gdx.input.setInputProcessor(stage);
     }
-
 
     @Override
     public void render(float delta) {
-
         Gdx.gl.glClearColor(0.1f, 0.1f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -68,21 +57,30 @@ public class GameScreen implements Screen {
         stage.draw();
     }
 
-    @Override public void resize(int width, int height) {
+    @Override
+    public void resize(int width, int height) {
         if (stage != null) {
             stage.getViewport().update(width, height, true);
         }
     }
-    @Override public void pause() {
+
+    @Override
+    public void pause() {
 
     }
-    @Override public void resume() {
+
+    @Override
+    public void resume() {
 
     }
-    @Override public void hide() {
+
+    @Override
+    public void hide() {
 
     }
-    @Override public void dispose() {
+
+    @Override
+    public void dispose() {
 
     }
 }

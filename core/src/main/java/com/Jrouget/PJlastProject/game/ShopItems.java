@@ -9,12 +9,12 @@ public enum ShopItems {
     DE_DIVIN("Dé Divin", "+8 chances de Seven", 90, "SEVEN", 8, "divineSeven.png"),
     TIRAGE("Tirage", "+5 Tirage", 100, "TIRAGE", 5, "ticket.png");
 
-    private String name;
-    private String description;
-    private Integer price;
-    private String effectType;
-    private Integer value;
-    private String imagePath;
+    private final String name;
+    private final String description;
+    private final Integer price;
+    private final String effectType;
+    private final Integer value;
+    private final String imagePath;
 
     ShopItems(String name, String description, Integer price, String effectType, Integer value, String imagePath) {
         this.name = name;
@@ -27,13 +27,13 @@ public enum ShopItems {
 
     public void boost(GameMechanic gameMechanic) {
         if(effectType.equals("APPLE")) {
-            gameMechanic.boosterApple(value);
+            gameMechanic.appleBoost(value);
         } else if (effectType.equals("ORANGE")) {
-            gameMechanic.boosterOrange(value);
+            gameMechanic.orangeBoost(value);
         } else if (effectType.equals("SEVEN")) {
-            gameMechanic.boosterSeven(value);
+            gameMechanic.sevenBoost(value);
         } else if (effectType.equals("TIRAGE")) {
-            gameMechanic.bonusTirage(value);
+            gameMechanic.getTicketsBonus(value);
         }
     }
 

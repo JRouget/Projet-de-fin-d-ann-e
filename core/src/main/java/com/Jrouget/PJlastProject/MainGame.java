@@ -16,8 +16,8 @@ public class MainGame extends Game {
 
     private String username = "";
 
-    public void MainGame(SupabaseServices supabaseServices) {
-        this.supabaseServices = supabaseServices;
+    public MainGame() {
+
     }
 
     public void setSession(String token, String id) {
@@ -43,6 +43,7 @@ public class MainGame extends Game {
 
     @Override
     public void create() {
+        this.supabaseServices = new SupabaseServices(this);
         setScreen(new AuthScreen(this, supabaseServices));
     }
 }

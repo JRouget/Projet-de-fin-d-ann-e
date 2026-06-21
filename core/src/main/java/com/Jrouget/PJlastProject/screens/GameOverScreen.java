@@ -9,10 +9,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.kotcrab.vis.ui.VisUI;
 
 public class GameOverScreen implements Screen {
     private MainGame game;
@@ -26,6 +28,7 @@ public class GameOverScreen implements Screen {
     private int finalRound;
     private int bestRound;
     private String username;
+    private Label errorMessage;
 
     public GameOverScreen(MainGame game, int finalRound) {
         this.game = game;
@@ -37,21 +40,21 @@ public class GameOverScreen implements Screen {
     public void show() {
         stage = new Stage(new FitViewport(480, 270));
 
-        creerFond();
-        creerInterface();
+        makeBackground();
+        makeUi();
 
         supabaseServices.getBestRound(finalRound);
 
         Gdx.input.setInputProcessor(stage);
     }
 
-    private void creerFond() {
+    private void makeBackground() {
         backgroundTexture = new Texture(Gdx.files.internal("backgroundGameOver.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }
 
-    private void creerInterface() {
+    private void makeUi() {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
@@ -59,10 +62,10 @@ public class GameOverScreen implements Screen {
         textureButtonReplay = new Texture(Gdx.files.internal("boutonRejouer.png"));
         textureButtonReplayClicked = new Texture(Gdx.files.internal("boutonRejouerClicked.png"));
 
-        TextureRegionDrawable dessinButtonReplay = new TextureRegionDrawable(textureButtonReplay);
-        TextureRegionDrawable dessinButtonReplayClicked = new TextureRegionDrawable(textureButtonReplayClicked);
+        TextureRegionDrawable buttonReplayDraw = new TextureRegionDrawable(textureButtonReplay);
+        TextureRegionDrawable buttonReplayClickedDraw = new TextureRegionDrawable(textureButtonReplayClicked);
 
-        ImageButton buttonReplay = new ImageButton(dessinButtonReplay, dessinButtonReplayClicked);
+        ImageButton buttonReplay = new ImageButton(buttonReplayDraw, buttonReplayClickedDraw);
 
         table.setPosition(0, -40);
 
@@ -75,10 +78,6 @@ public class GameOverScreen implements Screen {
 
         table.add(buttonReplay);
 
-    }
-
-    public int getFinalRound() {
-        return finalRound;
     }
 
     @Override

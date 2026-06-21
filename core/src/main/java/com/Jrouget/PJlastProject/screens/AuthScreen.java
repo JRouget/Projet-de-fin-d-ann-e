@@ -15,12 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisTextField;
-import com.Jrouget.PJlastProject.network.SupabaseServices;
 
 public class AuthScreen implements Screen {
 
-    private MainGame game;
-    private SupabaseServices supabaseServices;
+    private final MainGame game;
+    private final SupabaseServices supabaseServices;
 
     private Stage stage;
     private VisTextField emailField;
@@ -47,17 +46,17 @@ public class AuthScreen implements Screen {
 
         stage = new com.badlogic.gdx.scenes.scene2d.Stage(new FitViewport(480,  270));
 
-        creerFond();
-        creerInterface();
+        makeBackground();
+        makeUi();
     }
 
-    private void creerFond(){
+    private void makeBackground(){
         backgroundTexture = new Texture(Gdx.files.internal("backgroundFirstScreen.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }
 
-    private void creerInterface() {
+    private void makeUi() {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);

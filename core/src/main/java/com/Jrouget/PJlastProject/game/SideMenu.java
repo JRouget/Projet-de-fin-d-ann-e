@@ -38,11 +38,11 @@ public class SideMenu extends Group {
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = font;
         style.fontColor = Color.WHITE;
-        affichageArgent = new Label(String.valueOf(gameMechanic.getsoldeJoueur()), style);
+        affichageArgent = new Label(String.valueOf(gameMechanic.getPlayerSold()), style);
         affichageScore = new Label(String.valueOf(gameMechanic.getScore()), style);
         affichageQuota = new Label(String.valueOf(gameMechanic.getQuota()), style);
-        affichageManche = new Label(String.valueOf(gameMechanic.getManche()), style);
-        affichageTirage = new Label(String.valueOf(gameMechanic.getTirage()), style);
+        affichageManche = new Label(String.valueOf(gameMechanic.getRound()), style);
+        affichageTirage = new Label(String.valueOf(gameMechanic.getTickets()), style);
 
         affichageScore.setPosition(135, 170);
         affichageQuota.setPosition(150,115);
@@ -57,24 +57,30 @@ public class SideMenu extends Group {
         this.addActor(affichageTirage);
     }
 
-    public void rafraichirArgent(int nouvelArgent) {
-        affichageArgent.setText(String.valueOf(nouvelArgent));
+    public void refreshMoney(int newMoney) {
+
+        affichageArgent.setText(String.valueOf(newMoney));
     }
 
-    public void rafraichirScore(int nouveauScore) {
-        affichageScore.setText(String.valueOf(nouveauScore));
+    public void refreshScore(int newScore) {
+
+        affichageScore.setText(String.valueOf(newScore));
+
     }
 
-    public void rafraichirQuota(int nouveauQuota) {
-        affichageQuota.setText(String.valueOf(nouveauQuota));
+    public void refreshQuota(int newQuota) {
+
+        affichageQuota.setText(String.valueOf(newQuota));
     }
 
-    public void rafraichirManche(int nouvelleManche) {
-        affichageManche.setText(String.valueOf(nouvelleManche));
+    public void refreshRound(int newRound) {
+
+        affichageManche.setText(String.valueOf(newRound));
     }
 
-    public void rafraichirTirage(int nouveauTirage) {
-        affichageTirage.setText(String.valueOf(nouveauTirage));
+    public void refreshTickets(int newTickets) {
+
+        affichageTirage.setText(String.valueOf(newTickets));
     }
 
     public void dispose() {

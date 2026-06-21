@@ -17,8 +17,8 @@ import com.kotcrab.vis.ui.widget.VisTextField;
 
 public class UsernameScreen implements Screen {
 
-    private MainGame game;
-    private SupabaseServices supabaseServices;
+    private final MainGame game;
+    private final SupabaseServices supabaseServices;
 
     private Stage stage;
 
@@ -38,19 +38,17 @@ public class UsernameScreen implements Screen {
     public void show() {
         stage = new com.badlogic.gdx.scenes.scene2d.Stage(new FitViewport(480,  270));
 
-        creerFond();
-        creerInterface();
-
-
+        makeBackground();
+        makeUi();
     }
 
-    private void creerFond() {
+    private void makeBackground() {
         backgroundTexture = new Texture(Gdx.files.internal("backgroundFirstScreen.png"));
         com.badlogic.gdx.scenes.scene2d.ui.Image fond = new com.badlogic.gdx.scenes.scene2d.ui.Image(backgroundTexture);
         stage.addActor(fond);
     }
 
-    private void creerInterface() {
+    private void makeUi() {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);

@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class MachineSous extends Group {
 
-    private Texture levierTexture;
+    private Texture leverTexture;
     private Texture machineTexture;
 
     private Texture orange;
@@ -36,7 +36,7 @@ public class MachineSous extends Group {
         this.shopScreen = shopScreen;
 
         //Assets of the GB
-        levierTexture = new Texture(Gdx.files.internal("levier.png"));
+        leverTexture = new Texture(Gdx.files.internal("levier.png"));
         machineTexture = new Texture(Gdx.files.internal("gamblingMachine.png"));
         //Assets of the symbols
         orange = new Texture(Gdx.files.internal("orange.png"));
@@ -44,12 +44,13 @@ public class MachineSous extends Group {
         seven = new Texture(Gdx.files.internal("Seven.png"));
 
         //TexturesDraw of the GB
-        TextureRegionDrawable dessinLevier = new TextureRegionDrawable(levierTexture);
+        TextureRegionDrawable leverDraw = new TextureRegionDrawable(leverTexture);
         TextureRegionDrawable dessinMachine = new TextureRegionDrawable(machineTexture);
 
         //Image of the GB (button and body of the machine)
-        ImageButton boutonLevier = new ImageButton(dessinLevier);
+        ImageButton boutonLevier = new ImageButton(leverDraw);
         Image machineImage = new Image(dessinMachine);
+
         //Image of the symbols
         roll1 = new Image(orange);
         roll2 = new Image(apple);
@@ -58,29 +59,29 @@ public class MachineSous extends Group {
         boutonLevier.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if(gameMechanic.peutJouer()){
-                    int mancheAvant = gameMechanic.getManche();
+                if(gameMechanic.canPlay()){
+                    int mancheAvant = gameMechanic.getRound();
 
-                    int[] resultats = gameMechanic.tirage();
+                    int[] results = gameMechanic.tirage();
 
-                    afficherResultat(resultats[0], resultats[1], resultats[2]);
+                    getResults(results[0], results[1], results[2]);
 
-                    sideMenu.rafraichirArgent(gameMechanic.getsoldeJoueur());
-                    sideMenu.rafraichirScore(gameMechanic.getScore());
-                    sideMenu.rafraichirQuota(gameMechanic.getQuota());
-                    sideMenu.rafraichirManche(gameMechanic.getManche());
-                    sideMenu.rafraichirTirage(gameMechanic.getTirage());
+                    sideMenu.refreshMoney(gameMechanic.getPlayerSold());
+                    sideMenu.refreshScore(gameMechanic.getScore());
+                    sideMenu.refreshQuota(gameMechanic.getQuota());
+                    sideMenu.refreshRound(gameMechanic.getRound());
+                    sideMenu.refreshTickets(gameMechanic.getTickets());
 
-                    if(gameMechanic.getManche() > mancheAvant) {
+                    if(gameMechanic.getRound() > mancheAvant) {
                         System.out.println("Shop opening...");
                         shopScreen.refreshShop(gameMechanic);
                         shopScreen.setVisible(true);
                     }
 
                 }else {
-                    System.out.println("Morricio.. I can't move it move it anymore...");
+                    System.out.println("No tickets left, game over");
                     MainGame game = (MainGame) Gdx.app.getApplicationListener();
-                    game.setScreen(new GameOverScreen(game, gameMechanic.getManche()));
+                    game.setScreen(new GameOverScreen(game, gameMechanic.getRound()));
                 }
             }
         });
@@ -100,20 +101,20 @@ public class MachineSous extends Group {
         this.addActor(roll3);
     }
 
-    public void afficherResultat(int result1, int result2, int result3){
+    public void getResults(int result1, int result2, int result3){
         roll1.setDrawable(new TextureRegionDrawable(chooseTexture(result1)));
         roll2.setDrawable(new TextureRegionDrawable(chooseTexture(result2)));
         roll3.setDrawable(new TextureRegionDrawable(chooseTexture(result3)));
     }
 
-    public Texture chooseTexture(int chiffre){
-        if (chiffre == 1) return apple;
-        else if (chiffre == 2) return orange;
+    public Texture chooseTexture(int number){
+        if (number == 1) return apple;
+        else if (number == 2) return orange;
         else return seven;
     }
 
     public void dispose() {
         if (machineTexture != null) machineTexture.dispose();
-        if (levierTexture != null) levierTexture.dispose();
+        if (leverTexture != null) leverTexture.dispose();
     }
 }

@@ -1,22 +1,20 @@
 package com.Jrouget.PJlastProject.game;
 
-import com.Jrouget.PJlastProject.screens.ShopScreen;
-
 import java.util.Random;
 
 public class GameMechanic {
 
-    private int soldeJoueur = 0;
-    private final int coutTirage = 1;
+    private int playerSold = 0;
+    private final int roundCost = 1;
 
-    private int mancheActuelle = 1;
-    private int quotaManche = 20;
+    private int currentRound = 1;
+    private int roundQuota = 20;
     private int coef;
     private int score;
 
-    private int recompense = 100;
-    private int tirageBonus = 0;
-    private int tirage = 5;
+    private int reward = 100;
+    private int ticketsBonus = 0;
+    private int tickets = 5;
 
     private int probaApple = 60;
     private int probaOrange = 30;
@@ -28,30 +26,28 @@ public class GameMechanic {
     private int case2;
     private int case3;
 
-    private ShopScreen shopScreen;
-
     private Random random = new Random();
 
-    public boolean peutJouer(){
+    public boolean canPlay(){
 
-        return tirage >= coutTirage;
+        return tickets >= roundCost;
     }
 
     public int[] tirage(){
 
-        tirage -= coutTirage;
-        System.out.println("Player's balance : " + soldeJoueur);
+        tickets -= roundCost;
+        System.out.println("Player's balance : " + playerSold);
 
         case1 = generateSymbol();
         case2 = generateSymbol();
         case3 = generateSymbol();
 
-        coef = multiplicateur();
+        coef = multiplier();
 
         score += (case1 + case2 + case3) * coef;
         System.out.println("score =" + score);
         System.out.println("coef =" + coef);
-        System.out.println("tirages =" + tirage);
+        System.out.println("tirages =" + tickets);
 
         win();
         return new int[]{case1, case2, case3};
@@ -69,21 +65,21 @@ public class GameMechanic {
     }
 
     public void win() {
-        if (score >= quotaManche){
-            quotaManche += quotaManche;
-            mancheActuelle += 1;
-            soldeJoueur += recompense;
-            recompense += 50;
+        if (score >= roundQuota){
+            roundQuota += roundQuota;
+            currentRound += 1;
+            playerSold += reward;
+            reward += 50;
             score = 0;
         }
     }
 
     public void buying(int price) {
-        this.soldeJoueur -= price;
+        this.playerSold -= price;
     }
 
-    public int getsoldeJoueur() {
-        return soldeJoueur;
+    public int getPlayerSold() {
+        return playerSold;
     }
 
     public int getScore() {
@@ -91,18 +87,18 @@ public class GameMechanic {
     }
 
     public int getQuota() {
-        return quotaManche;
+        return roundQuota;
     }
 
-    public int getManche() {
-        return mancheActuelle;
+    public int getRound() {
+        return currentRound;
     }
 
-    public int getTirage() {
-        return tirage;
+    public int getTickets() {
+        return tickets;
     }
 
-    public int multiplicateur() {
+    public int multiplier() {
         if (case1 == case2 && case2 == case3) {
             if (case1 == 1) {
                 return 2;
@@ -115,23 +111,23 @@ public class GameMechanic {
         return 1;
     }
 
-    public void boosterApple(int bonus) {
+    public void appleBoost(int bonus) {
         this.probaApple += bonus;
     }
 
-    public void boosterOrange(int bonus) {
+    public void orangeBoost(int bonus) {
         this.probaOrange += bonus;
     }
 
-    public void boosterSeven(int bonus) {
+    public void sevenBoost(int bonus) {
         this.probaSeven += bonus;
     }
 
-    public void bonusTirage(int bonus) {
-        this.tirageBonus += bonus;
+    public void getTicketsBonus(int bonus) {
+        this.ticketsBonus += bonus;
     }
 
     public void prepareNewRound() {
-        tirage = 10 + tirageBonus;
+        tickets = 10 + ticketsBonus;
     }
 }
